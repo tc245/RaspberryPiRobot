@@ -12,7 +12,6 @@ led_pi = gpiozero.LED(21)
 
 #Initialise pygame
 pygame.joystick.init()
-jsPresent = 
 
 #Blinking LEDs to show controller not connected
 ready = False
