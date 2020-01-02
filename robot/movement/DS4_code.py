@@ -14,13 +14,16 @@ led_pi = gpiozero.LED(21)
 pygame.joystick.init() #initialise joystick module
 ready = False
 while ready == False:
-    if pygame.joystick.get_count() == 0: ##Blnk LED to signal controller and motors are ready to turn on
-        led_pi.on()
-        time.sleep(0.5)
-        led_pi.off()
-        time.sleep(0.5)
-    elif pygame.joystick.get_count() == 1:
-        ready = True
+    while pygame.joystick.get_init() == 1:
+        pygame.joystick.quit()
+        pygame.joystick.init()
+        if pygame.joystick.get_count() == 0: ##Blnk LED to signal controller and motors are ready to turn on
+            led_pi.on()
+            time.sleep(0.5)
+            led_pi.off()
+            time.sleep(0.5)
+        elif pygame.joystick.get_count() == 1:
+            ready = True
     
 #set up controller
 joystick = pygame.joystick.Joystick(0)
