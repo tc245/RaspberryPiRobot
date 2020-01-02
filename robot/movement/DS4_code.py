@@ -11,7 +11,7 @@ import os
 led_pi = gpiozero.LED(21)
 
 #Initialise pygame
-pygame.joystick.init()
+pygame.init()
 
 #Blinking LEDs to show controller not connected
 ready = False
@@ -20,7 +20,7 @@ while not ready:
     time.sleep(0.5)
     led_pi.off()
     time.sleep(0.5)
-    pygame.joystick.init()
+    pygame.init()
     if pygame.joystick.get_count() == 0:
         pygame.joystick.quit()
         time.sleep(0.5)
@@ -31,10 +31,6 @@ while not ready:
     
 #set up controller
 joystick = pygame.joystick.Joystick(0)
-
-#Debugging
-test = pygame.joystick.get_count()
-print(test)
 
 #Light LED to show controller working
 led_pi.on()
