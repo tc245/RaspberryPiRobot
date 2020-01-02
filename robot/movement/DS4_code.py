@@ -3,7 +3,6 @@
 import time
 import pygame
 import gpiozero
-import pygame
 import numpy
 import math
 
@@ -22,7 +21,7 @@ joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
 #create robot object
-robot = gpiozero.Robot(left=(17, 18), right=(27, 22))
+robot = gpiozero.Robot(left=(18, 17), right=(22, 27))
 
 #create flag object to exit while loop below
 done = False
