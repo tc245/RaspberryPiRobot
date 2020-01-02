@@ -10,15 +10,13 @@ import math
 led_pi = gpiozero.LED(21)
 
 #Set up pygame
-pygame.init()
-pygame.joystick.init()
-
-#Blnk LED to signal controller and motors are ready to turn on
 ready = False
 while not ready:
+    pygame.init() #initialise pygame
+    pygame.joystick.init() #initialise joystick module
     if pygame.joystick.get_count() > 0:
         ready = True
-    elif pygame.joystick.get_count() == 0:
+    elif pygame.joystick.get_count() == 0: ##Blnk LED to signal controller and motors are ready to turn on
         led_pi.on()
         time.sleep(0.5)
         led_pi.off()
