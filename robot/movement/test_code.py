@@ -14,7 +14,7 @@ led_pi = gpiozero.LED(21)
 pygame.joystick.init()
 
 #Blinking LEDs to show controller not connected
-ready = False
+ready = True
 while not ready:
     led_pi.on()
     time.sleep(0.5)
@@ -30,4 +30,6 @@ while not ready:
     elif pygame.joystick.get_init == 1 and pygame.joystick.get_count == 1:
         led_pi.on()
         ready = True
+
+print("got to the end!")
   
