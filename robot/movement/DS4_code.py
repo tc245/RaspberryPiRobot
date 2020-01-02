@@ -20,12 +20,10 @@ while not ready:
         led_pi.on()
         time.sleep(0.5)
         led_pi.off()
-        time.sleep(0.5)
-        pygame.joystick.quit()        
+        time.sleep(0.5)        
     
 #set up controller
 joystick = pygame.joystick.Joystick(0)
-joystick.init()
 
 #Light LED to show controller working
 led_pi.on()
