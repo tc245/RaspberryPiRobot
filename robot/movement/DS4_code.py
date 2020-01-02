@@ -38,6 +38,7 @@ while not done:
             if joystick.get_button(9) == True: #when share pressed quit loop
                 print("User Quit")
                 done = True
+                os.system("sudo shutdown -h now")
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values 
             if joystick.get_axis(1) != 0:
                 if joystick.get_axis(1) > 0:
