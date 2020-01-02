@@ -21,7 +21,7 @@ while not ready:
     led_pi.off()
     time.sleep(0.5)
     pygame.joystick.init()
-    if pygame.joystick.get_init == 1 and pygame.joystick.get_count == 0:
+    if pygame.joystick.get_count == 0:
         pygame.joystick.quit()
         time.sleep(0.5)
         print("It has quit!")
