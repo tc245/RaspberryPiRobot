@@ -1,3 +1,3 @@
 # RaspberryPiRobot
 
-Repo for messign about with raspberry pi robot.
+Repo for messing about with raspberry pi robot.
