@@ -23,10 +23,11 @@ while not ready:
 
 #Set up pygame and the controller    
 while not ready:
+    pygame.joystick.init()
     if pygame.joystick.get_init == 1 and pygame.joystick.get_count == 0:
         pygame.joystick.quit()
-        time.sleep(5)
-        pygame.joystick.init()
+        time.sleep(0.5)
+        print("It has quit!")
     elif pygame.joystick.get_init == 1 and pygame.joystick.get_count == 1:
         led_pi.on()
         ready = True
