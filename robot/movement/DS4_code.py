@@ -5,20 +5,34 @@ import pygame
 import gpiozero
 import numpy
 import math
+import os
 
 #Indicator to confirm ok to turn motors on
 led_pi = gpiozero.LED(21)
-for x in range(1, 5):
-    led_pi.off()
-    time.sleep(0.5)
+
+#Initialise pygame
+pygame.init()
+
+#Blinking LEDs to show controller not connected
+ready = False
+while not ready:
     led_pi.on()
     time.sleep(0.5)
+    led_pi.off()
+    time.sleep(0.5)
+    pygame.init()
+    if pygame.joystick.get_count() == 0:
+        pygame.joystick.quit()
+    elif pygame.joystick.get_init() == 1 and pygame.joystick.get_count() == 1:
+        led_pi.on()
+        ready = True
 
-#Set up controller with pygame
-pygame.init()
-pygame.joystick.init()
+#Create joystick object
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
+
+#Light LED to show controller working
+led_pi.on()
 
 #create robot object
 robot = gpiozero.Robot(left=(18, 17), right=(22, 27))
