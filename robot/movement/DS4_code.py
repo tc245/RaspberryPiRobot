@@ -30,7 +30,7 @@ while not ready:
 #set up controller
 pygame.joystick.init()
 assert pygame.joystick.get_count() == 1
-joystick = pygame.joystick.Joystick(0)
+joystick = pygame.joystick.Joystick(1)
 
 #Light LED to show controller working
 led_pi.on()
