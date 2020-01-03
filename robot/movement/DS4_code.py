@@ -6,6 +6,7 @@ import gpiozero
 import numpy
 import math
 import os
+import pantilthat
 
 #Indicator to confirm ok to turn motors on
 led_pi = gpiozero.LED(21)
