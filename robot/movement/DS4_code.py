@@ -25,8 +25,10 @@ while not ready:
         pygame.joystick.quit()
     elif pygame.joystick.get_init() == 1 and pygame.joystick.get_count() == 1:
         led_pi.on()
-        joystick = pygame.joystick.Joystick(0)
         ready = True
+
+#Create joystick object
+joystick = pygame.joystick.Joystick(0)        
 
 #Light LED to show controller working
 led_pi.on()
