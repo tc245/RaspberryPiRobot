@@ -28,12 +28,12 @@ while not ready:
         ready = True
     
 #set up controller
+pygame.joystick.init()
+assert pygame.joystick.get_count() == 1
 joystick = pygame.joystick.Joystick(0)
 
 #Light LED to show controller working
 led_pi.on()
-
-time.sleep(5)
 
 #create robot object
 robot = gpiozero.Robot(left=(18, 17), right=(22, 27))
