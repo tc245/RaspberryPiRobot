@@ -7,7 +7,7 @@ sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
 
 TB = ThunderBorg.ThunderBorg()
-TB.i2cAddress = 0x10
+TB.i2cAddress = 0x0a
 TB.Init()
 
 TB.SetMotors(0.1)
