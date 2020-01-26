@@ -73,4 +73,4 @@ while not done:
                     backward = joystick.get_axis(1) #To positive values
                     TB.SetMotors(backward)
             elif joystick.get_axis(1) == 0 or joystick.get_axis(3) == 0:
-                robot.stop() #stop robot with axis values = 0
+                TB.MotorsOff() #stop robot with axis values = 0
