@@ -7,7 +7,7 @@ sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
 
 TB = ThunderBorg.ThunderBorg()
-TB.init
+TB.init()
 
 TB.SetMotors(0.1)
 time.sleep(2)
