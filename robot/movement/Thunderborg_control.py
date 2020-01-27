@@ -24,6 +24,9 @@ import ThunderBorg
 #Indicators to confirm ok to turn motors on
 led1_pi = gpiozero.LED(26)
 led2_pi = gpiozero.LED(5)
+led1_pi.off()
+led2_pi.off()
+
 
 #Initialise pygame
 pygame.init()
@@ -159,7 +162,7 @@ while not done:
             elif joystick.get_hat(0) == (0, -1):
                  if tilt < -75:
                     PT.tilt(tilt)
-                elif tilt <= -75:
+                 elif tilt <= -75:
                     tilt = tilt-5
                     PT.tilt(tilt)
             
