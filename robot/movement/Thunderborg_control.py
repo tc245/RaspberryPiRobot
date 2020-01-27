@@ -148,7 +148,7 @@ while not done:
             elif joystick.get_hat(0) == (-1, 0):
                  if pan < -75:
                     PT.pan(pan)
-                elif pan <= -75:
+                 elif pan <= -75:
                     pan = pan-5
                     PT.pan(pan)
 
