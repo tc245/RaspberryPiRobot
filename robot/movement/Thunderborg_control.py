@@ -21,7 +21,7 @@ from subprocess import call
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
 
-#Indicator to confirm ok to turn motors on
+#Indicators to confirm ok to turn motors on
 led1_pi = gpiozero.LED(26)
 led2_pi = gpiozero.LED(5)
 
@@ -59,7 +59,7 @@ while not ready:
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
-#Light LED to show controller working
+#Light LEDs to show controller working
 led_pi1.on()
 led_pi2.on()
 
