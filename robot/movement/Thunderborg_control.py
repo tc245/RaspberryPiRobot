@@ -51,8 +51,8 @@ while not ready:
     if pygame.joystick.get_count() == 0:
         pygame.joystick.quit()
     elif pygame.joystick.get_init() == 1 and pygame.joystick.get_count() == 1:
-        led1_pi.on()
-        led2_pi.on()
+        led1_pi.off()
+        led2_pi.off()
         ready = True
 
 #Create joystick object
