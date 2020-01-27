@@ -15,23 +15,37 @@ sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
 
 #Indicator to confirm ok to turn motors on
-led_pi = gpiozero.LED(26)
+led1_pi = gpiozero.LED(26)
+led2_pi = gpiozero.LED(5)
 
 #Initialise pygame
 pygame.init()
 
+#Create instance of the pantilthat class
+PT = pantilthat.PanTilt()
+#create counter variables for the pantilt
+pan = 0
+tilt = 0
+
+#Centre the camera
+PT.pan(pan)
+PT.tilt(tilt)
+
 #Blinking LEDs to show controller not connected
 ready = False
 while not ready:
-    led_pi.on()
+    led1_pi.on()
+    led2_pi.on()
     time.sleep(0.5)
-    led_pi.off()
+    led1_pi.off()
+    led2_pi.off()
     time.sleep(0.5)
     pygame.init()
     if pygame.joystick.get_count() == 0:
         pygame.joystick.quit()
     elif pygame.joystick.get_init() == 1 and pygame.joystick.get_count() == 1:
-        led_pi.on()
+        led1_pi.on()
+        led2_pi.on()
         ready = True
 
 #Create joystick object
@@ -39,7 +53,8 @@ joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
 #Light LED to show controller working
-led_pi.on()
+led_pi1.on()
+led_pi2.on()
 
 #create robot object
 #Set-up the thunderborg object
@@ -57,10 +72,9 @@ if voltageOut > voltageIn:
 else:
     maxPower = voltageOut / float(voltageIn)
 
-
-
-#create flag object to exit while loop below
+#create flag object to exit main program loop
 done = False
+
 
 # -------- Main Program Loop -----------
 while not done:
@@ -99,6 +113,102 @@ while not done:
                     rightMotorForward = 1 - (1 + joystick.get_axis(3))
                     TB.SetMotor1(leftMotorReverse*maxPower)
                     TB.SetMotor2(rightMotorForward*maxPower) 
-            
+                    
             elif joystick.get_axis(1) == 0 or joystick.get_axis(3) == 0:
                 TB.MotorsOff() #stop robot with axis values = 0
+
+        elif event.type == pygame.JOYBUTTONDOWN: #move the pan tilt servors with d-pad
+            if joystick.get_button(1) = True:
+                if pan > 75:
+                    PT.pan(pan)
+                elif pan <= 75:
+                    pan = pan+5
+                    PT.pan(pan)
+
+            elif joystick.get_button(2) = True:
+                 if pan < -75:
+                    PT.pan(pan)
+                elif pan <= -75:
+                    pan = pan-5
+                    PT.pan(pan)
+
+            elif joystick.get_button(3) = True:
+                if tilt > 75:
+                    PT.tilt(tilt)
+                elif tilt <= 75:
+                    tilt = tilt+5
+                    PT.tilt(tilt)
+
+            elif joystick.get_button(4) = True:
+                 if tilt < -75:
+                    PT.tilt(tilt)
+                elif tilt <= -75:
+                    tilt = tilt-5
+                    PT.tilt(tilt)
+            
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
