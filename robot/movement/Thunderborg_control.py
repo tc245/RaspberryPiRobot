@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+#Stuff still to do:
+#Install the text to speak stuff from here: https://www.dexterindustries.com/howto/make-your-raspberry-pi-speak/
+#Including installling num2words package using; sudo pip3 install num2words
+#Adjust wiring on PI to add another GPIO LED (pin 5)
+
 #Thunderborg board to control robot
 
 import time
@@ -10,6 +15,8 @@ import math
 import os
 import pantilthat
 import sys
+from num2words import num2words
+from subprocess import call
 
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
@@ -75,6 +82,11 @@ else:
 #create flag object to exit main program loop
 done = False
 
+#Constants for text to speak function call
+cmd_beg= 'espeak '
+cmd_end= ' | aplay /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
+cmd_out= '--stdout > /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav ' # To store the voice file
+goodbye = "I am leaving now goodbye"
 
 # -------- Main Program Loop -----------
 while not done:
@@ -87,7 +99,12 @@ while not done:
         if event.type == pygame.JOYBUTTONDOWN:
             if joystick.get_button(9) == True: #when share pressed quit loop
                 print("User Quit")
-                done = True
+                PT.pan(0)
+                PT.tilt(0)
+                print(goodbye) #print quit message
+                goodbye = text.replace(' ', '_') #put in underscores to distinguish words
+                call([cmd_beg+cmd_out+goodbye+cmd_end], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
+                done = True 
                 os.system("sudo shutdown -h now")
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values 
             if joystick.get_axis(1) != 0:
@@ -117,29 +134,29 @@ while not done:
             elif joystick.get_axis(1) == 0 or joystick.get_axis(3) == 0:
                 TB.MotorsOff() #stop robot with axis values = 0
 
-        elif event.type == pygame.JOYBUTTONDOWN: #move the pan tilt servors with d-pad
-            if joystick.get_button(1) = True:
+        elif event.type == pygame.JOYHATMOTION: #move the pan tilt servors with d-pad
+            if joystick.get_hat(0) == (1, 0):
                 if pan > 75:
                     PT.pan(pan)
                 elif pan <= 75:
                     pan = pan+5
                     PT.pan(pan)
 
-            elif joystick.get_button(2) = True:
+            elif joystick.get_hat(0) == (-1, 0):
                  if pan < -75:
                     PT.pan(pan)
                 elif pan <= -75:
                     pan = pan-5
                     PT.pan(pan)
 
-            elif joystick.get_button(3) = True:
+            elif joystick.get_hat(0) == (0, 1):
                 if tilt > 75:
                     PT.tilt(tilt)
                 elif tilt <= 75:
                     tilt = tilt+5
                     PT.tilt(tilt)
 
-            elif joystick.get_button(4) = True:
+            elif joystick.get_hat(0) == (0, -1):
                  if tilt < -75:
                     PT.tilt(tilt)
                 elif tilt <= -75:
