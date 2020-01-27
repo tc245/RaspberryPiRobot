@@ -49,7 +49,7 @@ TB.Init()
 
 # Power settings
 voltageIn = 12.0                        # Total battery voltage to the ThunderBorg
-voltageOut = 7.5                       # Maximum motor voltage
+voltageOut = 7.0                       # Maximum motor voltage
 
 # Setup the power limits
 if voltageOut > voltageIn:
@@ -77,22 +77,28 @@ while not done:
                 os.system("sudo shutdown -h now")
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values 
             if joystick.get_axis(1) != 0:
+                
                 if joystick.get_axis(1) > 0:
-                    forward = joystick.get_axis(1)
+                    forward = 0 - joystick.get_axis(1)
                     TB.SetMotors(forward*maxPower)
+                
                 elif joystick.get_axis(1) < 0: #and backwards
-                    backward = joystick.get_axis(1) #To positive values
+                    backward = 0 - (joystick.get_axis(1)) #To positive values
                     TB.SetMotors(backward*maxPower)
+            
             elif joystick.get_axis(3) !=0: #axis values for robot left
+                
                 if joystick.get_axis(3) > 0:
                     leftMotorForward = joystick.get_axis(3)
                     rightMotorReverse = (-1) + (1-joystick.get_axis(3))
                     TB.SetMotor1(leftMotorForward*maxPower)
                     TB.SetMotor2(rightMotorReverse*maxPower)                    
+                
                 elif joystick.get_axis(3) < 0: #and right
                     leftMotorReverse = joystick.get_axis(3)
                     rightMotorForward = 1 - (1 + joystick.get_axis(3))
                     TB.SetMotor1(leftMotorReverse*maxPower)
                     TB.SetMotor2(rightMotorForward*maxPower) 
+            
             elif joystick.get_axis(1) == 0 or joystick.get_axis(3) == 0:
                 TB.MotorsOff() #stop robot with axis values = 0
