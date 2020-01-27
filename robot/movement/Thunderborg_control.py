@@ -80,7 +80,7 @@ while not done:
                     TB.SetMotor2(rightMotorReverse)                    
                 elif joystick.get_axis(3) < 0: #and right
                     leftMotorReverse = joystick.get_axis(3)
-                    rightMotorForward = 1 - (1 - joystick.get_axis(3))
+                    rightMotorForward = 1 - (1 + joystick.get_axis(3))
                     TB.SetMotor1(leftMotorReverse)
                     TB.SetMotor2(rightMotorForward) 
             elif joystick.get_axis(1) == 0 or joystick.get_axis(3) == 0:
