@@ -62,8 +62,8 @@ joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
 #Light LEDs to show controller working
-led_pi1.on()
-led_pi2.on()
+led1_pi.on()
+led2_pi.on()
 
 #create robot object
 #Set-up the thunderborg object
