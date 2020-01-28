@@ -88,7 +88,7 @@ done = False
 cmd_beg= 'espeak '
 cmd_end= ' | aplay /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
 cmd_out= '--stdout > /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav ' # To store the voice file
-goodbye = "i am leaving now, ketchup cam signing off, goodbye"
+goodbye = "i am leaving now ketchup cam signing off goodbye"
 
 # -------- Main Program Loop -----------
 while not done:
@@ -101,14 +101,7 @@ while not done:
         if event.type == pygame.JOYBUTTONDOWN:
             if joystick.get_button(9) == True: #when share pressed quit loop
                 print("User Quit")
-                PT.pan(0)
-                PT.tilt(0)
-                print(goodbye) #print quit message
-                goodbye = goodbye.replace(' ', '_') #put in underscores to distinguish words
-                call([cmd_beg+cmd_out+goodbye+cmd_end], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
-                time.sleep(5)
                 done = True 
-                os.system("sudo shutdown -h now")
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values 
             if joystick.get_axis(1) != 0:
                 
@@ -173,8 +166,17 @@ while not done:
                     tilt = PT.get_tilt()
                     tilt += 5
                     PT.tilt(tilt)
-            
-                
+
+#Quit program sequence            
+PT.pan(0)
+PT.tilt(0)
+print(goodbye) #print quit message
+goodbye = goodbye.replace(' ', '_') #put in underscores to distinguish words
+call([cmd_beg+cmd_out+goodbye+cmd_end], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
+time.sleep(5)
+led1_pi.off()
+led2_pi.off()
+os.system("sudo shutdown -h now")                
 
 
 
