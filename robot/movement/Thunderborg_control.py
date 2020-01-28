@@ -104,7 +104,7 @@ while not done:
                 PT.pan(0)
                 PT.tilt(0)
                 print(goodbye) #print quit message
-                goodbye = text.replace(' ', '_') #put in underscores to distinguish words
+                goodbye = goodbye.replace(' ', '_') #put in underscores to distinguish words
                 call([cmd_beg+cmd_out+goodbye+cmd_end], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
                 done = True 
                 os.system("sudo shutdown -h now")
