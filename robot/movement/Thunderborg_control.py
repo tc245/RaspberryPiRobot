@@ -15,7 +15,6 @@ import math
 import os
 import pantilthat
 import sys
-from num2words import num2words
 from subprocess import call
 
 sys.path.append('/home/pi/thunderborg')
