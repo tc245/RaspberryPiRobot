@@ -161,16 +161,16 @@ while not done:
                     tilt = PT.get_tilt()
                     PT.tilt(tilt)
                 elif PT.get_tilt <= 75:
-                    tilt = PT.tilt()
+                    tilt = PT.get_tilt()
                     tilt += -5
                     PT.tilt(tilt)
 
             elif joystick.get_hat(0) == (0, -1):
                  if PT.get_tilt < -75:
-                    tilt = PT.tilt()
+                    tilt = PT.get_tilt()
                     PT.tilt(tilt)
                  elif PT.get_tilt >= -75:
-                    tilt = PT.tilt()
+                    tilt = PT.get_tilt()
                     tilt += 5
                     PT.tilt(tilt)
             
