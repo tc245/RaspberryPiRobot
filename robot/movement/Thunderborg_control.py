@@ -88,7 +88,7 @@ done = False
 cmd_beg= 'espeak '
 cmd_end= ' | aplay /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
 cmd_out= '--stdout > /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav ' # To store the voice file
-goodbye = "I am leaving now, ketchup cam signing off, goodbye"
+goodbye = "i am leaving now, ketchup cam signing off, goodbye"
 
 # -------- Main Program Loop -----------
 while not done:
