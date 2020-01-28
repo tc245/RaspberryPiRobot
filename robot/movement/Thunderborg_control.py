@@ -139,30 +139,30 @@ while not done:
 
         elif event.type == pygame.JOYHATMOTION: #move the pan tilt servors with d-pad
             if joystick.get_hat(0) == (1, 0):
-                if pan > 75:
-                    PT.pan(pan)
-                elif pan <= 75:
+                if PT.get_pan() > 75:
+                    PT.pan(80)
+                elif PT.pan() <= 75:
                     pan += -5
                     PT.pan(pan)
 
             elif joystick.get_hat(0) == (-1, 0):
-                 if pan > -75:
-                    PT.pan(pan)
-                 elif pan <= -75:
+                 if PT.get_pan() < -75:
+                    PT.pan(-80)
+                 elif PT.get_pan() >= -75:
                     pan += 5
                     PT.pan(pan)
 
             elif joystick.get_hat(0) == (0, 1):
-                if tilt > 75:
-                    PT.tilt(tilt)
-                elif tilt <= 75:
+                if PT.get_tilt > 75:
+                    PT.tilt(80)
+                elif PT.get_tilt <= 75:
                     tilt += -5
                     PT.tilt(tilt)
 
             elif joystick.get_hat(0) == (0, -1):
-                 if tilt > -75:
-                    PT.tilt(tilt)
-                 elif tilt <= -75:
+                 if PT.get_tilt < -75:
+                    PT.tilt(-80)
+                 elif PT.get_tilt >= -75:
                     tilt += 5
                     PT.tilt(tilt)
             
