@@ -22,7 +22,7 @@ import ThunderBorg
 
 #Indicators to confirm ok to turn motors on
 led1_pi = gpiozero.LED(26)
-led2_pi = gpiozero.LED(6)
+led2_pi = gpiozero.LED(13)
 led1_pi.off()
 led2_pi.off()
 
