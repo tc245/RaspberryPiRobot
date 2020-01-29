@@ -40,6 +40,9 @@ tilt = 0
 PT.pan(pan)
 PT.tilt(tilt)
 
+#disable servo until needed to save power
+PT.idle_timeout(2)
+
 #Blinking LEDs to show controller not connected
 ready = False
 while not ready:
@@ -88,7 +91,7 @@ done = False
 cmd_beg= 'espeak '
 cmd_end= ' | aplay /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
 cmd_out= '--stdout > /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav ' # To store the voice file
-goodbye = "i am leaving now ketchup cam signing off goodbye"
+goodbye = "i am leaving now robot camera signing off goodbye"
 
 # -------- Main Program Loop -----------
 while not done:
@@ -99,10 +102,13 @@ while not done:
     # JOYBUTTONUP, JOYHATMOTION
     for event in pygame.event.get(): # User did something.
         if event.type == pygame.JOYBUTTONDOWN:
+            
             if joystick.get_button(9) == True: #when share pressed quit loop
                 print("User Quit")
-                done = True 
-        elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values 
+                done = True
+                
+        elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
+            
             if joystick.get_axis(1) != 0:
                 
                 if joystick.get_axis(1) > 0:
@@ -131,6 +137,7 @@ while not done:
                 TB.MotorsOff() #stop robot with axis values = 0
 
         elif event.type == pygame.JOYHATMOTION: #move the pan tilt servors with d-pad
+
             if joystick.get_hat(0) == (1, 0):
                 if PT.get_pan() > 75:
                     pan = PT.get_pan()
