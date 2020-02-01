@@ -155,7 +155,7 @@ while not done:
                     pan = 0
                     PT.pan(pan)
      
-                elif PT.get_pan() <= 75 and PT.get_pan() >= -75
+                elif PT.get_pan() <= 75 and PT.get_pan() >= -75:
                     pan = PT.get_pan()
                     pan += 5
                     PT.pan(pan)
@@ -167,7 +167,7 @@ while not done:
                     tilt = 0
                     PT.tilt(tilt)
      
-                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75
+                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75:
                     tilt = PT.get_tilt()
                     tilt -= 5
                     PT.tilt(tilt)
@@ -178,7 +178,7 @@ while not done:
                     tilt = 0
                     PT.tilt(tilt)
      
-                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75
+                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75:
                     tilt = PT.get_tilt()
                     tilt += 5
                     PT.tilt(tilt)
