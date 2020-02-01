@@ -16,6 +16,7 @@ import os
 import pantilthat
 import sys
 from subprocess import call
+import picamera
 
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
