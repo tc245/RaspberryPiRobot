@@ -144,7 +144,7 @@ while not done:
                     pan = 0
                     PT.pan(pan)
      
-                elif PT.get_pan() <= 75 and PT.get_pan() >= -75
+                elif PT.get_pan() <= 75 and PT.get_pan() >= -75:
                     pan = PT.get_pan()
                     pan -= 5
                     PT.pan(pan)
