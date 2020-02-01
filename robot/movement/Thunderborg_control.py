@@ -7,6 +7,9 @@
 
 #Thunderborg board to control robot
 
+#Sound test
+call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+
 import time
 import pygame
 import gpiozero
@@ -74,9 +77,6 @@ led2_pi.on()
 TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
-
-#Sound test
-call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
 #create camera object
 camera = picamera.PiCamera()
