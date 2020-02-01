@@ -107,6 +107,10 @@ while not done:
                 print("User Quit")
                 done = True
                 
+        elif event.type == pygame.JOYBUTTONDOWN:
+             if joystick.get_button(0) == True: 
+                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
             if joystick.get_axis(1) != 0:
@@ -182,10 +186,6 @@ while not done:
                     tilt = PT.get_tilt()
                     tilt += 5
                     PT.tilt(tilt)
-
-        elif event.type == pygame.JOYBUTTONDOWN:
-             if joystick.get_button(0) == True: #when share pressed quit loop
-                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
     
 
