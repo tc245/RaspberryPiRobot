@@ -183,6 +183,12 @@ while not done:
                     tilt += 5
                     PT.tilt(tilt)
 
+        elif event.type == pygame.JOYBUTTONDOWN:
+             if joystick.get_button(0) == True: #when share pressed quit loop
+                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+
+    
+
 #Quit program sequence            
 PT.pan(0)
 PT.tilt(0)
