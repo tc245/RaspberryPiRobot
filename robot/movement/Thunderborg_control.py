@@ -74,6 +74,12 @@ TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
 
+#create camera object
+camera = picamera.PiCamera()
+camera.rotation = 180
+imcount = 0
+photoname = 'image'
+
 # Power settings
 voltageIn = 12.0                        # Total battery voltage to the ThunderBorg
 voltageOut = 7.0                       # Maximum motor voltage
@@ -108,8 +114,14 @@ while not done:
                 done = True
                 
         elif event.type == pygame.JOYBUTTONDOWN:
-             if joystick.get_button(0) == True: 
-                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+            if joystick.get_button(0) == True: 
+                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+
+        elif event.type == pygame.JOYBUTTONDOWN:
+            if joystick.get_button(1) == True:
+                os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
+                imcount += 1
+                camera.capture("{0}{1}".format(photoname, imcount), format='jpeg')
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
