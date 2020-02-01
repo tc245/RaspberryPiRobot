@@ -80,6 +80,10 @@ camera = picamera.PiCamera()
 camera.rotation = 180
 imcount = 0
 photoname = 'image'
+photo = False #flag to exit photo loop
+
+#Flag to exit horn loop
+horn = False
 
 # Power settings
 voltageIn = 12.0                        # Total battery voltage to the ThunderBorg
@@ -114,14 +118,20 @@ while not done:
                 done = True
                 
         elif event.type == pygame.JOYBUTTONDOWN:
-            if joystick.get_button(0) == True: 
-                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+            if joystick.get_button(0) == True:
+                horn = True
+                while horn:
+                    call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+                    horn = False
 
         elif event.type == pygame.JOYBUTTONDOWN:
             if joystick.get_button(1) == True:
-                os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
-                imcount += 1
-                camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
+                photo = True
+                while photo:
+                    os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
+                    imcount += 1
+                    camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
+                    photo = False
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
