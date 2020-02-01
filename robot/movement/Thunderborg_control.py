@@ -118,14 +118,14 @@ while not done:
                 done = True
                 
         elif event.type == pygame.JOYBUTTONDOWN:
-            if joystick.get_button(0) == True:
+            if joystick.get_button(0):
                 horn = True
                 while horn:
                     call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
                     horn = False
 
         elif event.type == pygame.JOYBUTTONDOWN:
-            if joystick.get_button(1) == True:
+            if joystick.get_button(1):
                 photo = True
                 while photo:
                     os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
