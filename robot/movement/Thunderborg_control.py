@@ -94,10 +94,9 @@ else:
 done = False
 
 #Constants for text to speak function call
-cmd_beg= 'espeak '
-cmd_end= ' | aplay /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
-cmd_out= '--stdout > /home/pi/RaspberryPiRobot/robot/sound/goodbye.wav ' # To store the voice file
-goodbye = "i am leaving now robot camera signing off goodbye"
+cmd = 'espeak '
+errors = ' 2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
+goodbye = "i am leaving now, robot camera signing off, goodbye"
 
 # -------- Main Program Loop -----------
 while not done:
@@ -206,7 +205,7 @@ PT.pan(0)
 PT.tilt(0)
 print(goodbye) #print quit message
 goodbye = goodbye.replace(' ', '_') #put in underscores to distinguish words
-call([cmd_beg+cmd_out+goodbye+cmd_end], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
+call([cmd+goodbye+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
 time.sleep(5)
 led1_pi.off()
 led2_pi.off()
