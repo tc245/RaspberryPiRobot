@@ -7,9 +7,6 @@
 
 #Thunderborg board to control robot
 
-#Sound test
-call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
-
 import time
 import pygame
 import gpiozero
@@ -23,6 +20,9 @@ import picamera
 
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
+
+#Sound test
+call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
 #Indicators to confirm ok to turn motors on
 led1_pi = gpiozero.LED(26)
