@@ -120,21 +120,13 @@ while not done:
                 print("User Quit")
                 done = True
                 
-        elif event.type == pygame.JOYBUTTONDOWN:
             if joystick.get_button(0):
-                horn = True
-                while horn:
-                    call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
-                    horn = False
-
-        elif event.type == pygame.JOYBUTTONDOWN:
+                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+                
             if joystick.get_button(1):
-                photo = True
-                while photo:
-                    os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
-                    imcount += 1
-                    camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
-                    photo = False
+                os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
+                imcount += 1
+                camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
