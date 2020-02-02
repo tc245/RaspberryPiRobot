@@ -120,10 +120,10 @@ while not done:
                 print("User Quit")
                 done = True
                 
-            elif joystick.get_button(0):
+            if joystick.get_button(0):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
                 
-            elif joystick.get_button(1):
+            if joystick.get_button(1):
                 os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
                 imcount += 1
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
