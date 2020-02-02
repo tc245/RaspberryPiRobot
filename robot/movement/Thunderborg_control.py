@@ -126,6 +126,7 @@ while not done:
             if joystick.get_button(1):
                 os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
                 imcount += 1
+                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
                 camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
