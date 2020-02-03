@@ -86,8 +86,8 @@ camera = picamera.PiCamera()
 camera.rotation = 180
 imcount = 0
 photoname = 'image'
-camera.light_mode(camera.WS2812)
-camera.light_type(camera.GRBW)
+pantilthat.light_mode(pantilthat.WS2812)
+pantilthat.light_type(pantilthat.GRBW)
 
 #Light on flag
 light=False
