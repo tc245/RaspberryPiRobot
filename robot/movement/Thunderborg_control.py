@@ -27,7 +27,7 @@ import ThunderBorg
 call(["sudo", "mount", "-a"])
 
 #Sound test
-call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+#call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
 #Indicators to confirm ok to turn motors on
 led1_pi = gpiozero.LED(26)
@@ -173,10 +173,9 @@ while not done:
                     PT.set_all(r, g, b)
                     PT.show()
                     time.sleep(0.04)
-                    for event in pygame.event.get(): # User did something.
-                        if event.type == pygame.JOYBUTTONDOWN:
-                            if joystick.get_button(11):
-                                disco = False
+                    if event.type == pygame.JOYBUTTONDOWN:
+                        if joystick.get_button(11):
+                            disco = False
 
                 
             else:
