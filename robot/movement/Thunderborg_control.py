@@ -81,12 +81,16 @@ TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
 
-#create camera object
+#create camera object and set up neopixels
 camera = picamera.PiCamera()
 camera.rotation = 180
 imcount = 0
 photoname = 'image'
-photo = False #flag to exit photo loop
+camera.light_mode(pantilthat.WS2812)
+camera.light_type(pantilthat.GRBW)
+
+#Light on flag
+light=False
 
 #Flag to exit horn loop
 horn = False
@@ -131,6 +135,15 @@ while not done:
                 imcount += 1
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
                 camera.capture("{0}{1}.jpeg".format(photoname, imcount), format="jpeg")
+
+            elif joystick.get_button(2):
+                if light:
+                    camera.set_all(0, 0, 0, 0)
+                    camera.show()
+
+                elif light == False:
+                    camera.set_all(255, 255, 255, 255)
+                    camera.show()
 
             else:
                 print("Un-mapped button pressed")
