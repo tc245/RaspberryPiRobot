@@ -18,6 +18,7 @@ import sys
 from subprocess import call
 import picamera
 from datetime import datetime
+import colorsys
 
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
