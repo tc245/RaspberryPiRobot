@@ -140,10 +140,12 @@ while not done:
                 if light:
                     pantilthat.set_all(0, 0, 0, 0)
                     pantilthat.show()
+                    light = False
 
                 elif light == False:
                     pantilthat.set_all(255, 255, 255, 255)
                     pantilthat.show()
+                    light = True
 
             else:
                 print("Un-mapped button pressed")
