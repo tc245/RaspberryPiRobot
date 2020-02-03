@@ -159,7 +159,12 @@ while not done:
                     light = True
 
             elif joystick.get_button(11): #Disco mode!
+                disco = True
                 while disco:
+                    for event in pygame.event.get(): # User did something.
+                        if event.type == pygame.JOYBUTTONDOWN:
+                            if joystick.get_button(11):
+                                disco = False
                     t = time.time()
                     b = (math.sin(t * 2) + 1) / 2
                     b = int(b * 255.0)
@@ -171,7 +176,7 @@ while not done:
                     PT.set_all(r, g, b)
                     PT.show()
                     time.sleep(0.04)
-                    
+                
             else:
                 call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
 
