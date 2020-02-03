@@ -17,6 +17,7 @@ import pantilthat
 import sys
 from subprocess import call
 import picamera
+from datetime import datetime
 
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
@@ -33,7 +34,6 @@ led2_pi = gpiozero.LED(13)
 led1_pi.off()
 led2_pi.off()
 
-
 #Initialise pygame
 pygame.init()
 
@@ -42,6 +42,9 @@ PT = pantilthat.PanTilt()
 #create counter variables for the pantilt
 pan = 0
 tilt = 0
+#Set up the camera light
+PT.light_mode(pantilthat.WS2812)
+PT.light_type(pantilthat.GRBW)
 
 #Centre the camera
 PT.pan(pan)
@@ -84,10 +87,6 @@ TB.Init()
 #create camera object and set up neopixels
 camera = picamera.PiCamera()
 camera.rotation = 180
-imcount = 0
-photoname = 'image'
-pantilthat.light_mode(pantilthat.WS2812)
-pantilthat.light_type(pantilthat.GRBW)
 
 #Light on flag
 light=False
@@ -111,7 +110,11 @@ done = False
 #Constants for text to speak function call
 cmd = 'espeak '
 errors = ' 2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
+#Different messages
 goodbye = "i am leaving now, robot camera signing off, goodbye"
+goodbye = goodbye.replace(' ', '_') 
+wrong_button = "sorry, this button is not mapped. try another one"
+wrong_button = wrong_button.replace(' ', '_') 
 
 # -------- Main Program Loop -----------
 while not done:
@@ -127,28 +130,33 @@ while not done:
                 print("User Quit")
                 done = True
                 
-            elif joystick.get_button(0):
+            elif joystick.get_button(12): #Horn
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
                 
-            elif joystick.get_button(1):
+            elif joystick.get_button(1): #camera and shutter noise
                 os.chdir("/home/pi/Pictures")
-                imcount += 1
+                d = datetime.now()
+                year = str(d.year)
+                month = str(d.month)
+                day = str(d.day)
+                hour = str(d.hour)
+                mins = str(d.minute)
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
-                camera.capture("{0}{1}.jpeg".format(photoname, imcount), format="jpeg")
+                camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
-            elif joystick.get_button(2):
+            elif joystick.get_button(11): #Light on and off
                 if light:
-                    pantilthat.set_all(0, 0, 0, 0)
-                    pantilthat.show()
+                    PT.set_all(0, 0, 0, 0)
+                    PT.show()
                     light = False
 
                 elif light == False:
-                    pantilthat.set_all(255, 255, 255, 255)
-                    pantilthat.show()
+                    PT.set_all(255, 255, 255, 255)
+                    PT.show()
                     light = True
-
+                    
             else:
-                print("Un-mapped button pressed")
+                call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
@@ -232,7 +240,6 @@ while not done:
 PT.pan(0)
 PT.tilt(0)
 print(goodbye) #print quit message
-goodbye = goodbye.replace(' ', '_') #put in underscores to distinguish words
 call([cmd+goodbye+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
 time.sleep(5)
 led1_pi.off()
