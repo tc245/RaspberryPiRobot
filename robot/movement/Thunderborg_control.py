@@ -158,7 +158,7 @@ while not done:
                     PT.show()
                     light = True
 
-            elif joystick.get_button(11): #Disco mode!
+            elif joystick.get_button(2): #Disco mode!
                 disco = True
                 while disco:
                     t = time.time()
