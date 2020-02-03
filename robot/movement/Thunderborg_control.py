@@ -21,6 +21,9 @@ import picamera
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg
 
+#mount NAS
+call(["sudo", "mount", "-a"])
+
 #Sound test
 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
