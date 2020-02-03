@@ -124,10 +124,10 @@ while not done:
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
                 
             elif joystick.get_button(1):
-                os.chdir("/home/pi/RaspberryPiRobot/robot/photos")
+                os.chdir("/home/pi/Pictures")
                 imcount += 1
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
-                camera.capture("{0}{1}".format(photoname, imcount), format="jpeg")
+                camera.capture("{0}{1}.jpeg".format(photoname, imcount), format="jpeg")
 
             else:
                 print("Un-mapped button pressed")
