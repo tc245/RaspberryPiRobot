@@ -138,12 +138,12 @@ while not done:
 
             elif joystick.get_button(2):
                 if light:
-                    camera.set_all(0, 0, 0, 0)
-                    camera.show()
+                    pantilthat.set_all(0, 0, 0, 0)
+                    pantilthat.show()
 
                 elif light == False:
-                    camera.set_all(255, 255, 255, 255)
-                    camera.show()
+                    pantilthat.set_all(255, 255, 255, 255)
+                    pantilthat.show()
 
             else:
                 print("Un-mapped button pressed")
