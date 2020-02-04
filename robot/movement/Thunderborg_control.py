@@ -162,7 +162,7 @@ while not done:
             elif joystick.get_button(2): #Disco mode!
                 disco = True
                 while disco:
-                    if pygame.event.peek(JOYBUTTONDOWN):
+                    if pygame.event.peek(pygame.JOYBUTTONDOWN):
                         disco = False
 
                     elif pygame.event.peek(None):
