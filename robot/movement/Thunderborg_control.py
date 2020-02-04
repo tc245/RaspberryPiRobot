@@ -133,16 +133,16 @@ while not done:
             elif joystick.get_button(12): #Horn
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
                 
-            elif joystick.get_button(1): #camera and shutter noise
+            elif joystick.get_button(1): #camera and 
                 os.chdir("/home/pi/Pictures")
-                d = datetime.now()
+                d = datetime.now() #Collect time stamp when picture taken
                 year = str(d.year)
                 month = str(d.month)
                 day = str(d.day)
                 hour = str(d.hour)
                 mins = str(d.minute)
-                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
-                camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
+                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"]) #shutter noise
+                camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg") #Image capture
 
             elif joystick.get_button(11): #Light on and off
                 if light:
