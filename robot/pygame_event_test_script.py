@@ -9,5 +9,6 @@ joystick.init()
 
 while True:
     events = pygame.event.get()
-    print(events)
-    time.sleep(1)
+    for event in events:
+        print(event)
+        time.sleep(1)
