@@ -6,6 +6,6 @@ pygame.init()
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
-events = pygame.event.get()
-
-print(events)
+while true:
+    events = pygame.event.get()
+    print(events)
