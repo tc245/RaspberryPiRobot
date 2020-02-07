@@ -1,4 +1,5 @@
 import pygame
+import time
 
 pygame.init()
 
@@ -9,3 +10,4 @@ joystick.init()
 while True:
     events = pygame.event.get()
     print(events)
+    time.sleep(1)
