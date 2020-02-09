@@ -271,7 +271,7 @@ while not done:
             if horn_on:
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
             #Turn on disco mode
-            if disco_mode:
+            elif disco_mode:
                 pygame.event.clear()
                 while disco_mode:
                     t = time.time()
@@ -290,7 +290,7 @@ while not done:
                         if event.type == pygame.JOYBUTTONDOWN:
                             disco_mode == False                
             #Take a photo
-            if take_photo:
+            elif take_photo:
                 os.chdir("/home/pi/Pictures")
                 d = datetime.now()
                 year = str(d.year)
@@ -302,15 +302,15 @@ while not done:
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
                 take_photo = False
             #Turn light on
-            if light_on:
+            elif light_on:
                 PT.set_all(255, 255, 255, 255)
                 PT.show()
-            if not light_on:
+            elif not light_on:
                 PT.set_all(0, 0, 0, 0)
                 PT.show()
             #Move the camera
             ## Right and left
-            if cam_right or cam_left and PT.get_pan() not in range(-75,75):
+            elif cam_right or cam_left and PT.get_pan() not in range(-75,75):
                 pan_to = PT.get_pan
                 PT.pan(pan_to)
             elif cam_right and PT.get_pan() in range(-75,75):
@@ -320,7 +320,7 @@ while not done:
                 pan_to = PT.get_pan()-5
                 PT.pan(pan_to)
             ##Up and down
-            if cam_up or cam_down and PT.get_tilt() not in range(-75,75):
+            elif cam_up or cam_down and PT.get_tilt() not in range(-75,75):
                 tilt_to = PT.get_tilt
                 PT.tilt(tilt_to)
             elif cam_up and PT.get_tilt() in range(-75,75):
@@ -329,10 +329,7 @@ while not done:
             elif cam_down and PT.get_tilt() in range(-75,75):
                 tilt_to = PT.get_tilt()-5
                 PT.tilt(tilt_to) 
-            # Unmapped button
-            if unmapped_button:
-                   call([cmd+wrong_button+options+errors], shell=True)
-                   
+                
         # Wait for the interval period
         time.sleep(interval)
     # Disable all drives
