@@ -300,6 +300,7 @@ while not done:
                 mins = str(d.minute)
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
+                take_photo = False
             #Turn light on
             if light_on:
                 PT.set_all(255, 255, 255, 255)
