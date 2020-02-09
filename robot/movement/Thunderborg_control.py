@@ -248,8 +248,6 @@ while not done:
                 cam_up = True
             elif joystick.get_hat(0) == (0, -1):
                 cam_down == True                
-            else: #Calls the Espeak TTS Engine to read aloud unmapped button text
-                unmapped_button = True
 
             #Do the actions!
                 
