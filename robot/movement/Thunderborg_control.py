@@ -182,6 +182,7 @@ while not done:
     take_photo = False
     disco_mode = False
     horn_on = False
+    light_on = False
     cam_up = False
     cam_down = False
     cam_left = False
