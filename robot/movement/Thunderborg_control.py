@@ -232,9 +232,9 @@ while not done:
             elif joystick.get_button(disco):
                 disco_mode = True
             elif joystick.get_button(light):
-                if light_on = True:
+                if light_on == True:
                     light_on = False
-                elif light_on = False:
+                elif light_on == False:
                     light_on = True
             elif joystick.get_button(horn):
                 horn_on = True
