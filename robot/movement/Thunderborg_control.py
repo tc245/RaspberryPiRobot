@@ -15,16 +15,16 @@ Axis 5 - Right stick vertical
 Axis 6 - Right trigger
 
 Button 0 cross
-Button 1 circle
-Button 2 triangle
-Button 3 square
+Button 1 circle (camera)
+Button 2 triangle (disco mode)
+Button 3 square (light)
 Button 4 Left Shoulder
 Button 5 Right Shoulder
 Button 8 Share
-Button 9 Options
+Button 9 Options (quit)
 Button 10 Playstation
 Button 11 Left stick button
-Button 12 Right stick button
+Button 12 Right stick button (horn)
 
 Joy hat buttons:
 
@@ -32,6 +32,19 @@ Joy hat buttons:
 (1,0) = Right and move camera right
 (0,-1) = Down and move camera down
 (0,1) = Up and move camera up
+
+axisUpDown = 1          # Joystick axis to read for up / down position
+axisLeftRight = 4       # Joystick axis to read for left / right position
+buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
+slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
+buttonFastTurn = 5      # Joystick button number for turning fast (R2)
+camera = 1              # Button number for camera shutter
+horn = 12               # Button number for Horn
+disco = 2               # Button number for disco mode
+light = 3               # Button to turn light on and off
+quit_button = 9         # Button to quit and shutdown robot
+interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
+
 """
 
 #Thunderborg board to control robot
@@ -152,10 +165,10 @@ axisLeftRight = 4       # Joystick axis to read for left / right position
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
-camera = 1              # Button number for camera shutter
+camera_button = 1              # Button number for camera shutter
 horn = 12               # Button number for Horn
 disco = 2               # Button number for disco mode
-light = 1               # Button to turn light on and off
+light = 3               # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
 
@@ -228,7 +241,7 @@ while not done:
             if joystick.get_button(buttonSlow):
                 driveLeft *= slowFactor
                 driveRight *= slowFactor
-            elif joystick.get_button(camera):
+            elif joystick.get_button(camera_button):
                 take_photo = True
             elif joystick.get_button(disco):
                 disco_mode = True
