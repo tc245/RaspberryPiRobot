@@ -186,7 +186,7 @@ while not done:
     cam_up = False
     cam_down = False
     cam_left = False
-    Cam_right = False
+    cam_right = False
     unmapped_button = False
     #
     # EVENT PROCESSING STEP
