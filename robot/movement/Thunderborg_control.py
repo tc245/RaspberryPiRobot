@@ -134,7 +134,7 @@ pygame.init()
 pygame.mixer.init()
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
 goodbye = pygame.mixer.Sound("time2die.wav")
-horn = pygame.mixer.Sound("horn.wav")
+horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 
 #Blinking LEDs to show controller not connected
