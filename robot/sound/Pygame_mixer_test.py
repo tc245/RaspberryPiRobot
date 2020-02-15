@@ -8,6 +8,6 @@ goodbye = pygame.mixer.Sound("time2die.wav")
 horn = pygame.mixer.Sound("horn.wav")
 
 horn.play()
-time.sleep(5)
+time.sleep(20)
 goodbye.play()
 time.sleep(120)
