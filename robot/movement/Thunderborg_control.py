@@ -160,16 +160,19 @@ TB.SetLedShowBattery(True)
 ledBatteryMode = True
 
 #Joystick settings
+#Axes
 axisUpDown = 1          # Joystick axis to read for up / down position
 axisLeftRight = 4       # Joystick axis to read for left / right position
+#buttons
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
 camera_button = 1       # Button number for camera shutter
-horn = 12               # Button number for Horn
-disco = 2               # Button number for disco mode
-light = 3               # Button to turn light on and off
+horn_button = 12        # Button number for Horn
+disco_button = 2        # Button number for disco mode
+light_button = 3        # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
+#Other settings
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
 
 #create flag object to exit main program loop
@@ -208,7 +211,7 @@ while not done:
                 done = True
 
             #Horn
-            elif joystick.get_button(horn):
+            elif joystick.get_button(horn_button):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
             #camera
@@ -224,19 +227,19 @@ while not done:
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
             #Light
-            elif joystick.get_button(light):
+            elif joystick.get_button(light_button):
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
                     PT.show()
-                    light = False
+                    light_on = False
 
                 elif not light_on:
                     PT.set_all(255, 255, 255, 255)
                     PT.show()
-                    light = True
+                    light_on = True
 
             """#Turn on disco mode
-            elif joystick.get_button(disco):
+            elif joystick.get_button(disco_button):
                 pygame.event.clear(JOYBUTTONDOWN)
                 disco_mode = True
                 while disco_mode:
