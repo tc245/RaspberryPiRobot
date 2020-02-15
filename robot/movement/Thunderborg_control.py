@@ -165,7 +165,7 @@ axisLeftRight = 4       # Joystick axis to read for left / right position
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
-camera_button = 1              # Button number for camera shutter
+camera_button = 1       # Button number for camera shutter
 horn = 12               # Button number for Horn
 disco = 2               # Button number for disco mode
 light = 3               # Button to turn light on and off
@@ -183,7 +183,7 @@ cmd = 'espeak '
 errors = ' 2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
 options = ' -s 120 -v f4 en-sc -p 65 -a 30'
 #Different messages
-goodbye = "I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched C-beams glitter in the dark near the Tannhowser Gate. All those moments will be lost in time, like tears in rain. Time to die."
+goodbye = "I've seen things you people wouldn't believe Attack ships on fire off the shoulder of Orion I watched C-beams glitter in the dark near the Tannhowser Gate All those moments will be lost in time, like tears in rain. Time to die."
 goodbye = goodbye.replace(' ', '_') 
 wrong_button = "sorry, this button is not mapped. try another one"
 wrong_button = wrong_button.replace(' ', '_') 
@@ -206,11 +206,11 @@ while not done:
                 done = True
 
             #Horn
-            elif joystick.get_button(horn):
+            if joystick.get_button(horn):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
             #camera
-            elif joystick.get_button(camera_button):
+            if joystick.get_button(camera_button):
                 os.chdir("/home/pi/Pictures")
                 d = datetime.now()
                 year = str(d.year)
@@ -222,7 +222,7 @@ while not done:
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
             #Light
-            elif joystick.get_button(light):
+            if joystick.get_button(light):
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
                     PT.show()
@@ -252,8 +252,8 @@ while not done:
                     if pygame.event.get(JOYBUTTONDOWN):
                         disco_mode == False"""
                             
-            else:
-                call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
+            #else:
+             #   call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
                 
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
