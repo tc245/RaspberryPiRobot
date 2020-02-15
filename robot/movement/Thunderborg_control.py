@@ -196,7 +196,7 @@ while not done:
     # Possible joystick actions: JOYAXISMOTION, JOYBALLMOTION, JOYBUTTONDOWN,
     # JOYBUTTONUP, JOYHATMOTION
     # Get the latest events from the system
-    for event in pygame.event.get: # User did something.
+    for event in pygame.event.get(): # User did something.
         if event.type == pygame.JOYBUTTONDOWN:
             if joystick.get_button(quit_button): #when share pressed quit loop
                 print("User Quit")
