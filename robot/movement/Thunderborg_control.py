@@ -175,6 +175,9 @@ interval = 0.00         # Time between updates in seconds, smaller responds fast
 #create flag object to exit main program loop
 done = False
 
+#other flag variables
+light_on = False
+
 #Constants for text to speak function call
 cmd = 'espeak '
 errors = ' 2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
@@ -187,20 +190,6 @@ wrong_button = wrong_button.replace(' ', '_')
 
 # -------- Main Program Loop -----------
 while not done:
-    driveLeft = 0.0
-    driveRight = 0.0
-    upDown = 0.0
-    leftRight = 0.0
-    hadEvent = False
-    take_photo = False
-    disco_mode = False
-    horn_on = False
-    light_on = False
-    cam_up = False
-    cam_down = False
-    cam_left = False
-    cam_right = False
-    unmapped_button = False
     #
     # EVENT PROCESSING STEP
     #
@@ -209,70 +198,40 @@ while not done:
     # Get the latest events from the system
     events = pygame.event.get()
     for event in events: # User did something.
-        if joystick.get_button(quit_button): #when share pressed quit loop
+        if event.type == pygame.JOYBUTTONDOWN:
+            if joystick.get_button(quit_button): #when share pressed quit loop
                 print("User Quit")
                 done = True
-        elif event.type == pygame.JOYBUTTONDOWN:
-            # A button on the joystick just got pushed down
-            hadEvent = True
-        elif event.type == pygame.JOYAXISMOTION:
-            # A joystick has been moved
-            hadEvent = True
-        elif event.type == pygame.JOYHATMOTION:
-            # A d pad button was pushed
-            hadEvent = True
-        if hadEvent:
-            # Read axis positions (-1 to +1)
-            upDown = joystick.get_axis(axisUpDown)
-            leftRight = joystick.get_axis(axisLeftRight)
-            # Apply steering speeds
-            if not joystick.get_button(buttonFastTurn):
-                leftRight *= 0.5
-            # Determine the drive power levels
-            driveLeft = -upDown
-            driveRight = -upDown
-            if leftRight < -0.05:
-                # Turning left
-                driveLeft *= 1.0 + (2.0 * leftRight)
-            elif leftRight > 0.05:
-                # Turning right
-                driveRight *= 1.0 - (2.0 * leftRight)
-            # Check for button presses
-            if joystick.get_button(buttonSlow):
-                driveLeft *= slowFactor
-                driveRight *= slowFactor
-            elif joystick.get_button(camera_button):
-                take_photo = True
-            elif joystick.get_button(disco):
-                disco_mode = True
-            elif joystick.get_button(light):
-                if light_on == True:
-                    light_on = False
-                elif light_on == False:
-                    light_on = True
-            elif joystick.get_button(horn):
-                horn_on = True
-            # Check for joy hat presses
-            if joystick.get_hat(0) == (1, 0):
-                cam_right = True
-            elif joystick.get_hat(0) == (-1, 0):
-                cam_left = True
-            elif joystick.get_hat(0) == (0, 1):
-                cam_up = True
-            elif joystick.get_hat(0) == (0, -1):
-                cam_down == True                
 
-            #Do the actions!
-                
-            # Set the motors to the new speeds
-            TB.SetMotor1(driveRight * maxPower)
-            TB.SetMotor2(driveLeft * maxPower)
-            # Sound horn
-            if horn_on:
+            elif joystick.get_button(horn):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+
+            elif joystick.get_button(camera_button):
+                os.chdir("/home/pi/Pictures")
+                d = datetime.now()
+                year = str(d.year)
+                month = str(d.month)
+                day = str(d.day)
+                hour = str(d.hour)
+                mins = str(d.minute)
+                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
+                camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
+
+            elif joystick.get_button(light):
+                if light_on:
+                    PT.set_all(0, 0, 0, 0)
+                    PT.show()
+                    light = False
+
+                elif not light_on:
+                    PT.set_all(255, 255, 255, 255)
+                    PT.show()
+                    light = True
+
             #Turn on disco mode
-            elif disco_mode:
-                pygame.event.clear()
+            elif joystick.get_button(disco):
+                pygame.event.clear(JOYBUTTONDOWN)
+                disco_mode = True
                 while disco_mode:
                     t = time.time()
                     b = (math.sin(t * 2) + 1) / 2
@@ -285,32 +244,55 @@ while not done:
                     PT.set_all(r, g, b)
                     PT.show()
                     time.sleep(0.04)
-                    events = pygame.event.get()
-                    for event in events: # User did something.
-                        if event.type == pygame.JOYBUTTONDOWN:
-                            disco_mode == False                
-            #Take a photo
-            elif take_photo:
-                os.chdir("/home/pi/Pictures")
-                d = datetime.now()
-                year = str(d.year)
-                month = str(d.month)
-                day = str(d.day)
-                hour = str(d.hour)
-                mins = str(d.minute)
-                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
-                camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
-                take_photo = False
-            #Turn light on
-            elif light_on:
-                PT.set_all(255, 255, 255, 255)
-                PT.show()
-            elif not light_on:
-                PT.set_all(0, 0, 0, 0)
-                PT.show()
-            #Move the camera
-            ## Right and left
-            elif cam_right or cam_left and PT.get_pan() not in range(-75,75):
+                    if pygame.event.get(JOYBUTTONDOWN):
+                        disco_mode == False
+                            
+            else:
+                call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
+                
+
+        elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
+            
+            if joystick.get_axis(axisUpDown) != 0:
+                
+                if joystick.get_axis(axisUpDown) > 0:
+                    forward = 0 - joystick.get_axis(1)
+                    TB.SetMotors(forward*maxPower)
+                
+                elif joystick.get_axis(axisUpDown) < 0: #and backwards
+                    backward = 0 - (joystick.get_axis(1)) #To positive values
+                    TB.SetMotors(backward*maxPower)
+
+            elif joystick.get_axis(axisLeftRight) !=0: #axis values for robot left
+                
+                if joystick.get_axis(axisLeftRight) > 0:
+                    leftMotorForward = joystick.get_axis(axisLeftRight)
+                    rightMotorReverse = (-1) + (1-joystick.get_axis(axisLeftRight))
+                    TB.SetMotor1(leftMotorForward*maxPower)
+                    TB.SetMotor2(rightMotorReverse*maxPower)                    
+                
+                elif joystick.get_axis(axisLeftRight) < 0: #and right
+                    leftMotorReverse = joystick.get_axis(axisLeftRight)
+                    rightMotorForward = 1 - (1 + joystick.get_axis(axisLeftRight))
+                    TB.SetMotor1(leftMotorReverse*maxPower)
+                    TB.SetMotor2(rightMotorForward*maxPower) 
+                    
+            elif joystick.get_axis(axisLeftRight) == 0 and joystick.get_axis(axisLeftRight) == 0:
+                TB.MotorsOff() #stop robot with axis values = 0
+
+        #Move the camera        
+        elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
+            if joystick.get_hat(0) == (1, 0):
+                cam_right = True
+            elif joystick.get_hat(0) == (-1, 0):
+                cam_left = True
+            elif joystick.get_hat(0) == (0, 1):
+                cam_up = True
+            elif joystick.get_hat(0) == (0, -1):
+                cam_down == True
+
+            #Right and left movement    
+            if cam_right or cam_left and PT.get_pan() not in range(-75,75):
                 pan_to = PT.get_pan
                 PT.pan(pan_to)
             elif cam_right and PT.get_pan() in range(-75,75):
@@ -319,8 +301,9 @@ while not done:
             elif cam_left and PT.get_pan() in range(-75,75):
                 pan_to = PT.get_pan()-5
                 PT.pan(pan_to)
-            ##Up and down
-            elif cam_up or cam_down and PT.get_tilt() not in range(-75,75):
+                
+            ##Up and down movement
+            if cam_up or cam_down and PT.get_tilt() not in range(-75,75):
                 tilt_to = PT.get_tilt
                 PT.tilt(tilt_to)
             elif cam_up and PT.get_tilt() in range(-75,75):
@@ -328,12 +311,7 @@ while not done:
                 PT.tilt(tilt_to)
             elif cam_down and PT.get_tilt() in range(-75,75):
                 tilt_to = PT.get_tilt()-5
-                PT.tilt(tilt_to) 
-                
-        # Wait for the interval period
-        time.sleep(interval)
-    # Disable all drives
-    TB.MotorsOff()
+                PT.tilt(tilt_to)
 
 #Quit program sequence            
 PT.pan(0)
