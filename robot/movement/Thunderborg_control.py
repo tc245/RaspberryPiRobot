@@ -206,11 +206,11 @@ while not done:
                 done = True
 
             #Horn
-            if joystick.get_button(horn):
+            elif joystick.get_button(horn):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
             #camera
-            if joystick.get_button(camera_button):
+            elif joystick.get_button(camera_button):
                 os.chdir("/home/pi/Pictures")
                 d = datetime.now()
                 year = str(d.year)
@@ -222,7 +222,7 @@ while not done:
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
             #Light
-            if joystick.get_button(light):
+            elif joystick.get_button(light):
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
                     PT.show()
