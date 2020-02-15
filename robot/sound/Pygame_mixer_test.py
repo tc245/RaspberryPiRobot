@@ -12,3 +12,6 @@ horn.play()
 time.sleep(3)
 camera_shutter.play()
 time.sleep(3)
+
+length_cam = camera_shutter.get_length
+print(length_cam)
