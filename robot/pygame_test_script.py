@@ -4,6 +4,10 @@ import time
 done = False
 loop = False
 
+pygame.init()
+joystick = pygame.joystick.Joystick(0)
+joystick.init()
+
 while not done:
     for event in pygame.event.get(): # User did something.
         if event.type == pygame.JOYBUTTONDOWN:
