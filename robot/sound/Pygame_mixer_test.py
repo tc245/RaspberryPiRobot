@@ -10,7 +10,5 @@ camera_shutter = pygame.mixer.Sound("camer_shutter.wav")
 
 horn.play()
 time.sleep(3)
-goodbye.play()
-time.sleep(60)
 camera_shutter.play()
 time.sleep(3)
