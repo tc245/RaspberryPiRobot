@@ -176,6 +176,8 @@ interval = 0.00         # Time between updates in seconds, smaller responds fast
 done = False
 
 #other flag variables
+PT.set_all(0, 0, 0, 0)
+PT.show()
 light_on = False
 
 #Constants for text to speak function call
