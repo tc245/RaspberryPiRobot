@@ -130,6 +130,12 @@ TB.SetLedShowBattery(False)
 TB.SetLeds(0,0,1)
 os.environ["SDL_VIDEODRIVER"] = "dummy" # Removes the need to have a GUI window
 pygame.init()
+#and the pygame mixer
+pygame.mixer.init()
+os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
+goodbye = pygame.mixer.Sound("time2die.wav")
+horn = pygame.mixer.Sound("horn.wav")
+camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 
 #Blinking LEDs to show controller not connected
 ready = False
@@ -183,16 +189,6 @@ PT.set_all(0, 0, 0, 0)
 PT.show()
 light_on = False
 
-#Constants for text to speak function call
-cmd = 'espeak '
-errors = ' 2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
-options = ' -s 120 -v f4 en-sc -p 65 -a 30'
-#Different messages
-goodbye = "I've seen things you people wouldn't believe Attack ships on fire off the shoulder of Orion I watched C-beams glitter in the dark near the Tannhowser Gate All those moments will be lost in time, like tears in rain. Time to die."
-goodbye = goodbye.replace(' ', '_') 
-wrong_button = "sorry, this button is not mapped. try another one"
-wrong_button = wrong_button.replace(' ', '_') 
-
 # -------- Main Program Loop -----------
 while not done:
     #
@@ -212,7 +208,7 @@ while not done:
 
             #Horn
             elif joystick.get_button(horn_button):
-                #call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
+                horn.play()
                 print("horn button pressed")
 
             #camera
@@ -224,7 +220,7 @@ while not done:
                 day = str(d.day)
                 hour = str(d.hour)
                 mins = str(d.minute)
-                #call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
+                camera_shutter.play()
                 print("cam button pressed")
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
@@ -329,8 +325,9 @@ while not done:
 PT.pan(0)
 PT.tilt(0)
 print(goodbye) #print quit message
-call([cmd+goodbye+options+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
-time.sleep(5)
+goodbye_length=goodbye.get_length()
+goodbye.play()
+time.sleep(goodbye_length)
 led1_pi.off()
 led2_pi.off()
 os.system("sudo shutdown -h now")                
