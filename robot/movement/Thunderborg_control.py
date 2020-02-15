@@ -197,14 +197,19 @@ while not done:
     # JOYBUTTONUP, JOYHATMOTION
     # Get the latest events from the system
     for event in pygame.event.get(): # User did something.
+
         if event.type == pygame.JOYBUTTONDOWN:
+            
+            #Quit
             if joystick.get_button(quit_button): #when share pressed quit loop
                 print("User Quit")
                 done = True
 
+            #Horn
             elif joystick.get_button(horn):
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
 
+            #camera
             elif joystick.get_button(camera_button):
                 os.chdir("/home/pi/Pictures")
                 d = datetime.now()
@@ -216,6 +221,7 @@ while not done:
                 call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"])
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
+            #Light
             elif joystick.get_button(light):
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
@@ -227,7 +233,7 @@ while not done:
                     PT.show()
                     light = True
 
-            #Turn on disco mode
+            """#Turn on disco mode
             elif joystick.get_button(disco):
                 pygame.event.clear(JOYBUTTONDOWN)
                 disco_mode = True
@@ -244,7 +250,7 @@ while not done:
                     PT.show()
                     time.sleep(0.04)
                     if pygame.event.get(JOYBUTTONDOWN):
-                        disco_mode == False
+                        disco_mode == False"""
                             
             else:
                 call([cmd+wrong_button+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
