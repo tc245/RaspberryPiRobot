@@ -1,4 +1,5 @@
 import pygame
+import os
 
 pygame.mixer.init()
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
