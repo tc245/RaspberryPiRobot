@@ -226,6 +226,7 @@ while not done:
 
             #Light
             elif joystick.get_button(light_button):
+                print("light button pressed")
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
                     PT.show()
