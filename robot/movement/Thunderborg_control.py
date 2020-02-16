@@ -198,11 +198,11 @@ light_on = False
 while not done:
     ltr559.update_sensor()
     lux = ltr559.get_lux()
-    if lux <= 000.31:
+    if lux <= 000.00:
         light_on = True
         PT.set_all(255, 255, 255, 255)
         PT.show()
-    elif lux > 000.31:
+    elif lux > 000.00:
         light_on = False
         PT.set_all(0, 0, 0, 0)
         PT.show()
