@@ -50,6 +50,7 @@ interval = 0.00         # Time between updates in seconds, smaller responds fast
 #Thunderborg board to control robot
 
 import time
+from ltr559 import LTR559
 import pygame
 import gpiozero
 import numpy
@@ -184,6 +185,10 @@ interval = 0.00         # Time between updates in seconds, smaller responds fast
 #create flag object to exit main program loop
 done = False
 
+#Set up light sensor
+ltr559 = LTR559()
+
+
 #other flag variables
 PT.set_all(0, 0, 0, 0)
 PT.show()
@@ -191,6 +196,15 @@ light_on = False
 
 # -------- Main Program Loop -----------
 while not done:
+    ltr559.update_sensor()
+    lux = ltr559.get_lux()
+    if lux <= 000.31:
+        PT.set_all(255, 255, 255, 255)
+        PT.show()
+    elif lux > 000.31:
+        PT.set_all(0, 0, 0, 0)
+        PT.show()
+        
     #
     # EVENT PROCESSING STEP
     #
@@ -224,8 +238,8 @@ while not done:
                 print("cam button pressed")
                 camera.capture("{0}_{1}_{2}_{3}_{4}.jpeg".format(day, month, year, hour, mins), format="jpeg")
 
-            #Light
-            elif joystick.get_button(light_button):
+            #Light            
+            """elif joystick.get_button(light_button):
                 print("light button pressed")
                 if light_on:
                     PT.set_all(0, 0, 0, 0)
@@ -236,6 +250,9 @@ while not done:
                     PT.set_all(255, 255, 255, 255)
                     PT.show()
                     light_on = True
+                    """
+
+            
 
             """#Turn on disco mode
             elif joystick.get_button(disco_button):
@@ -321,6 +338,7 @@ while not done:
             elif cam_down and PT.get_tilt() in range(-75,75):
                 tilt_to = PT.get_tilt()-5
                 PT.tilt(tilt_to)
+        
 
 #Quit program sequence            
 PT.pan(0)
