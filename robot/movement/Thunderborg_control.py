@@ -260,7 +260,7 @@ while not done:
             if joystick.get_hat(0) == (1, 0):
 
                 if PT.get_pan() > 75 or PT.get_pan() < -75:
-                    pan = pan
+                    pan = 0
                     print(pan)
                     PT.pan(pan)
      
@@ -273,7 +273,7 @@ while not done:
             elif joystick.get_hat(0) == (-1, 0):
                 
                 if PT.get_pan() > 75 or PT.get_pan() < -75:
-                    pan = pan
+                    pan = 0
                     print(pan)
                     PT.pan(pan)
      
@@ -287,7 +287,7 @@ while not done:
             elif joystick.get_hat(0) == (0, 1):
                 
                 if PT.get_tilt() > 75 or PT.get_tilt() < -75:
-                    tilt = tilt
+                    tilt = 0
                     print(tilt)
                     PT.tilt(tilt)
      
@@ -300,7 +300,7 @@ while not done:
             elif joystick.get_hat(0) == (0, -1):
                 
                 if PT.get_tilt() > 75 or PT.get_tilt() < -75:
-                    tilt = tilt
+                    tilt = 0
                     print(tilt)
                     PT.tilt(tilt)
      
