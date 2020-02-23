@@ -35,7 +35,8 @@ global watchdog
 running = True
 
 TB = ThunderBorg.ThunderBorg()
-TB.i2cAddress = 0x0a                  # Uncomment and change the value if you have changed the board address
+
+TB.i2cAddress = 0x0a                  #Board address changed
 TB.Init()
 if not TB.foundChip:
     boards = ThunderBorg.ScanForThunderBorg()
@@ -54,7 +55,7 @@ TB.SetLeds(0,0,1)
 
 # Power settings
 voltageIn = 1.2 * 10                    # Total battery voltage to the ThunderBorg
-voltageOut = 7                # Maximum motor voltage, we limit it to 95% to allow the RPi to get uninterrupted power
+voltageOut = 7                # Limit voltage to 7 volts (for devastator motors)
 
 # Setup the power limits
 if voltageOut > voltageIn:
@@ -163,7 +164,8 @@ class WebServer(SocketServer.BaseRequestHandler):
         global watchdog
         # Get the HTTP request data
         reqData = self.request.recv(1024).strip()
-        reqData = reqData.split('')
+        reqData = reqData.split('
+')
         # Get the URL requested
         getPath = ''
         for line in reqData:
