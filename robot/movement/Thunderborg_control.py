@@ -191,47 +191,55 @@ while not done:
 
             if joystick.get_hat(0) == (1, 0):
 
-                if PT.get_pan() > 75 and PT.get_pan() < -75:
+                if PT.get_pan() > 75 or PT.get_pan() < -75:
                     pan = 0
+                    print(pan)
                     PT.pan(pan)
      
-                elif PT.get_pan() <= 75 and PT.get_pan() >= -75:
+                elif PT.get_pan() <= 75 or PT.get_pan() >= -75:
                     pan = PT.get_pan()
                     pan -= 5
+                    print(pan)
                     PT.pan(pan)
 
             elif joystick.get_hat(0) == (-1, 0):
                 
-                if PT.get_pan() > 75 and PT.get_pan() < -75:
+                if PT.get_pan() > 75 or PT.get_pan() < -75:
                     pan = 0
+                    print(pan)
                     PT.pan(pan)
      
-                elif PT.get_pan() <= 75 and PT.get_pan() >= -75:
+                elif PT.get_pan() <= 75 or PT.get_pan() >= -75:
                     pan = PT.get_pan()
                     pan += 5
+                    print(pan)
                     PT.pan(pan)
 
 
             elif joystick.get_hat(0) == (0, 1):
                 
-                if PT.get_tilt() > 75 and PT.get_tilt() < -75:
+                if PT.get_tilt() > 75 or PT.get_tilt() < -75:
                     tilt = 0
+                    print(tilt)
                     PT.tilt(tilt)
      
-                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75:
+                elif PT.get_tilt() <= 75 or PT.get_tilt() >= -75:
                     tilt = PT.get_tilt()
                     tilt -= 5
+                    print(tilt)
                     PT.tilt(tilt)
 
             elif joystick.get_hat(0) == (0, -1):
                 
-                if PT.get_tilt() > 75 and PT.get_tilt() < -75:
+                if PT.get_tilt() > 75 or PT.get_tilt() < -75:
                     tilt = 0
+                    print(tilt)
                     PT.tilt(tilt)
      
-                elif PT.get_tilt() <= 75 and PT.get_tilt() >= -75:
+                elif PT.get_tilt() <= 75 or PT.get_tilt() >= -75:
                     tilt = PT.get_tilt()
                     tilt += 5
+                    print(tilt)
                     PT.tilt(tilt)
 
     
