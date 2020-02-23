@@ -200,9 +200,12 @@ while not done:
                 print("User Quit")
                 done = True
                 
+
             elif joystick.get_button(horn_button): #Horn
-                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
-                
+                horn.play()
+                print("horn button pressed")
+
+
             elif joystick.get_button(camera_button): #camera and 
                 os.chdir("/home/pi/Pictures")
                 d = datetime.now() #Collect time stamp when picture taken
@@ -212,7 +215,7 @@ while not done:
                 hour = str(d.hour)
                 mins = str(d.minute)
                 secs = str(d.second)
-                call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/camera_shutter.wav"]) #shutter noise
+                camera_shutter.play() #shutter noise
                 camera.capture("{0}_{1}_{2}_{3}_{4}_{5}.jpeg".format(day, month, year, hour, mins, secs), format="jpeg") #Image capture
 
             elif joystick.get_button(light_button): #Light on and off
@@ -316,11 +319,12 @@ while not done:
 PT.pan(0)
 PT.tilt(0)
 print(goodbye) #print quit message
-call([cmd+goodbye+errors], shell=True) #Calls the Espeak TTS Engine to read aloud the Text
-time.sleep(5)
+goodbye_length=goodbye.get_length()
+goodbye.play()
+time.sleep(goodbye_length)
 led1_pi.off()
 led2_pi.off()
-os.system("sudo shutdown -h now")                
+os.system("sudo shutdown -h now")              
 
 
 
