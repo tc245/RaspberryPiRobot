@@ -216,15 +216,15 @@ while not done:
                 camera.capture("{0}_{1}_{2}_{3}_{4}_{5}.jpeg".format(day, month, year, hour, mins, secs), format="jpeg") #Image capture
 
             elif joystick.get_button(light_button): #Light on and off
-                if light:
+                if light_on:
                     PT.set_all(0, 0, 0, 0)
                     PT.show()
-                    light = False
+                    light_on = False
 
-                elif light == False:
+                elif light_on == False:
                     PT.set_all(255, 255, 255, 255)
                     PT.show()
-                    light = True
+                    light_on = True
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
