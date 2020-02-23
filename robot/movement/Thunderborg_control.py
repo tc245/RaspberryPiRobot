@@ -10,11 +10,10 @@
 """Button mapping:
 Axis 0 - Left stick horizontal
 Axis 1 - Left stick vertical
-Axis 2 - Right stick horizontal
-Axis 3 - Left trigger
-Axis 4 -Right stick horizontal
-Axis 5 - Right stick vertical
-Axis 6 - Right trigger
+Axis 2 - Left trigger
+Axis 3 - Right stick horizontal
+Axis 4 -Right stick vertical
+Axis 5 - Right trigger
 Button 0 cross
 Button 1 circle (camera)
 Button 2 triangle (disco mode)
@@ -165,7 +164,7 @@ led2_pi.on()
 #Joystick settings
 #Axes
 axisUpDown = 1          # Joystick axis to read for up / down position
-axisLeftRight = 5       # Joystick axis to read for left / right position
+axisLeftRight = 3       # Joystick axis to read for left / right position
 #buttons
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
