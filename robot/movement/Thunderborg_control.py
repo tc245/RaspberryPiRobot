@@ -152,15 +152,15 @@ while not ready:
         led2_pi.off()
         ready = True
 
-#Light LEDs to show controller working
-led1_pi.on()
-led2_pi.on()
-
 #Create joystick object
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 TB.SetLedShowBattery(True)
 ledBatteryMode = True
+
+#Light LEDs to show controller working
+led1_pi.on()
+led2_pi.on()
 
 #Joystick settings
 #Axes
