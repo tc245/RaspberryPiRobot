@@ -165,7 +165,7 @@ led2_pi.on()
 #Joystick settings
 #Axes
 axisUpDown = 1          # Joystick axis to read for up / down position
-axisLeftRight = 4       # Joystick axis to read for left / right position
+axisLeftRight = 5       # Joystick axis to read for left / right position
 #buttons
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
