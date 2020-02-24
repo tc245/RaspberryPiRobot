@@ -78,7 +78,7 @@ PT = pantilthat.PanTilt() #Create instance
 #Set up the camera light
 PT.light_mode(pantilthat.WS2812)
 PT.light_type(pantilthat.GRBW)
-#Create globals for light colours
+#Create globals for light colours more info here: https://rgbcolorcode.com/
 green = 0
 red = 0
 blue = 0
