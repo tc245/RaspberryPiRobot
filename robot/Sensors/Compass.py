@@ -10,4 +10,4 @@ while True:
 
     print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
 
-    time.sleep(1.0/50)
+    time.sleep(2)
