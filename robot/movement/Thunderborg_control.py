@@ -232,7 +232,7 @@ while not done:
                     light_on = False
 
                 elif light_on == False:
-                    white = 255
+                    white = 50
                     PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = True
