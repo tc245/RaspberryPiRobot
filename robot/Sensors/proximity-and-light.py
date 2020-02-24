@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 
 import time
@@ -10,9 +9,8 @@ try:
     while True:
         ltr559.update_sensor()
         lux = ltr559.get_lux()
-        prox = ltr559.get_proximity()
 
-        print("Lux: {:06.2f}, Proximity: {:04d}".format(lux, prox))
+        print("Lux: {:06.2f}".format(lux))
 
         time.sleep(0.05)
 except KeyboardInterrupt:
