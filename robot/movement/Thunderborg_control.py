@@ -74,13 +74,20 @@ led1_pi.off()
 led2_pi.off()
 
 #Create instance of the pantilthat class
-PT = pantilthat.PanTilt()
-#create counter variables for the pantilt
-pan_to = 0
-tilt_to = 0
+PT = pantilthat.PanTilt() #Create instance
 #Set up the camera light
 PT.light_mode(pantilthat.WS2812)
 PT.light_type(pantilthat.GRBW)
+#Create globals for light colours
+green = 0
+red = 0
+blue = 0
+white = 0
+
+#create counter variables for the pantilt
+pan_to = 0
+tilt_to = 0
+
 
 #Centre the camera
 PT.pan(pan_to)
@@ -219,12 +226,14 @@ while not done:
 
             elif joystick.get_button(light_button): #Light on and off
                 if light_on:
-                    PT.set_all(0, 0, 0, 0)
+                    white = 0
+                    PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = False
 
                 elif light_on == False:
-                    PT.set_all(255, 255, 255, 255)
+                    white = 255
+                    PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = True
 
