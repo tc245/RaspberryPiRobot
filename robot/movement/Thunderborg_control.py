@@ -245,14 +245,14 @@ while not done:
                 if joystick.get_axis(axisLeftRight) < 0:
                     rightMotorForward = joystick.get_axis(axisLeftRight)
                     leftMotorReverse = (-1) + (1-joystick.get_axis(axisLeftRight))
-                    TB.SetMotor2(rightMotorForward*maxPower)
-                    TB.SetMotor1(leftMotorReverse*maxPower)                    
+                    TB.SetMotor2(leftMotorForward*maxPower)
+                    TB.SetMotor1(rightMotorReverse*maxPower)                    
                 
                 elif joystick.get_axis(axisLeftRight) > 0: #and right
                     rightMotorReverse = joystick.get_axis(axisLeftRight)
                     leftMotorForward = 1 - (1 + joystick.get_axis(axisLeftRight))
-                    TB.SetMotor2(rightMotorReverse*maxPower)
-                    TB.SetMotor1(leftMotorForward*maxPower) 
+                    TB.SetMotor2(leftMotorReverse*maxPower)
+                    TB.SetMotor1(rightMotorForward*maxPower) 
                     
             elif joystick.get_axis(axisUpDown) == 0 or joystick.get_axis(axisLeftRight) == 0:
                 TB.MotorsOff() #stop robot with axis values = 0
