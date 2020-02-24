@@ -12,6 +12,6 @@ try:
 
         print("Lux: {:06.2f}".format(lux))
 
-        time.sleep(0.05)
+        time.sleep(2)
 except KeyboardInterrupt:
     pass
