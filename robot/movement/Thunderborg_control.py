@@ -34,7 +34,7 @@ Joy hat buttons:
 
 Global values
 axisUpDown = 1          # Joystick axis to read for up / down position
-axisLeftRight = 3       # Joystick axis to read for left / right position
+axisLeftRight = 4       # Joystick axis to read for left / right position
 buttonSlow = 4          # Joystick button number for driving slowly whilst held (L2)
 slowFactor = 0.5        # Speed to slow to when the drive slowly button is held, e.g. 0.5 would be half speed
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
@@ -243,14 +243,14 @@ while not done:
             elif joystick.get_axis(axisLeftRight) !=0: #axis values for robot left
                 
                 if joystick.get_axis(axisLeftRight) < 0:
-                    rightMotorForward = joystick.get_axis(axisLeftRight)
-                    leftMotorReverse = (-1) + (1-joystick.get_axis(axisLeftRight))
+                    leftMotorForward = joystick.get_axis(axisLeftRight)
+                    rightMotorReverse = (-1) + (1-joystick.get_axis(axisLeftRight))
                     TB.SetMotor2(leftMotorForward*maxPower)
                     TB.SetMotor1(rightMotorReverse*maxPower)                    
                 
                 elif joystick.get_axis(axisLeftRight) > 0: #and right
-                    rightMotorReverse = joystick.get_axis(axisLeftRight)
-                    leftMotorForward = 1 - (1 + joystick.get_axis(axisLeftRight))
+                    leftMotorReverse = joystick.get_axis(axisLeftRight)
+                    rightMotorForward = 1 - (1 + joystick.get_axis(axisLeftRight))
                     TB.SetMotor2(leftMotorReverse*maxPower)
                     TB.SetMotor1(rightMotorForward*maxPower) 
                     
