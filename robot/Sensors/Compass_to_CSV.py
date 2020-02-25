@@ -84,7 +84,7 @@ zero = raw_heading(minimums, maximums)
 input("Press a key to begin readings!\n")
 
 #Create a CSV file and writer instance
-with open('mag_heading.csv', 'w', newline='') as file:
+with open('mag_heading.csv') as file:
     writer = csv.writer(file)
     writer.writerow(["Heading"])
 
