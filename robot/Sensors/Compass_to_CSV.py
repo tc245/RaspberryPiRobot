@@ -86,7 +86,7 @@ input("Press a key to begin readings!\n")
 #Create a CSV file and writer instance
 with open('mag_heading.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["Heading")]
+    writer.writerow(["Heading"])
 
 # Begin compass readings and display on RGB matrix
 while True:
