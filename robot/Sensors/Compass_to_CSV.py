@@ -91,5 +91,7 @@ with open('mag_heading.csv', 'w') as file:
 # Begin compass readings and display on RGB matrix
 while True:
     rh = raw_heading(minimums, maximums, zero=zero)
-    writer.writerow([rh])
+    with open('mag_heading.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow([rh])
     time.sleep(0.2)
