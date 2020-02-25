@@ -18,7 +18,7 @@ def raw_heading(minimums, maximums, zero=0):
     """Return a raw compass heading calculated from the magnetometer data."""
 
     X = 0
-    Y = 1  # Change to 1 if you have the breakout flat
+    Y = 2  # Change to 1 if you have the breakout flat
 
     # The range over which values will be calculated, i.e. -1 to +1
     mag_range = 2
