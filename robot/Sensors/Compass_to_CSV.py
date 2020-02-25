@@ -59,7 +59,7 @@ press a key to start, then rotate it 360 degrees, keeping it flat...\n")
 # Variables to govern calibration time
 t_start = time.time()
 t_elapsed = 0
-calibration_time = 30
+calibration_time = 15
 
 # Initial values for mins and maxs
 minimums = list(lsm.magnetometer())
