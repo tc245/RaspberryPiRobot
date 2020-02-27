@@ -11,10 +11,10 @@ with open('gauss.csv', 'w') as file:
     writer.writerow(["X"], ["Y"], ["Z"])
 
 while True:
-    xyz = lsm.magnetometer()
+    xyz = list(lsm.magnetometer())
     print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
     with open('gauss.csv', 'a') as file:
         writer = csv.writer(file)
-        writer.writerow([xyz])
+        writer.writerow([xyz[X]], [xyz[Y]], [xyz[Z]])
     time.sleep(0.2)
 
