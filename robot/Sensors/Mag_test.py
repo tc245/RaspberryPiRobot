@@ -15,6 +15,6 @@ while True:
     print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
     with open('gauss.csv', 'a') as file:
         writer = csv.writer(file)
-        writer.writerow(xyz[0, 1, 2])
+        writer.writerow(xyz[0], xyz[1], xyz[2])
     time.sleep(0.2)
 
