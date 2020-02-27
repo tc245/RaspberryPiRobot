@@ -16,5 +16,7 @@ for _ in range(150):
     with open('gauss.csv', 'a') as file:
         writer.writerow(xyz[0:3])
     time.sleep(0.2)
+
+file.close()
     
 
