@@ -13,8 +13,7 @@ with open('gauss.csv', 'w') as file:
 for _ in range(150):
     xyz = list(lsm.magnetometer())
     print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
-    with open('gauss.csv', 'a') as file:
-        writer.writerow(xyz[0:3])
+    writer.writerow(xyz[0:3])
     time.sleep(0.2)
 
 file.close()
