@@ -2,6 +2,7 @@
 
 import time
 from lsm303d import LSM303D
+import csv
 
 lsm = LSM303D(0x1d) # Change to 0x1e if you have soldered the address jumper
 
