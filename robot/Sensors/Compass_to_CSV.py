@@ -59,15 +59,24 @@ press a key to start, then rotate it 360 degrees, keeping it flat...\n")
 # Variables to govern calibration time
 t_start = time.time()
 t_elapsed = 0
-calibration_time = 15
+calibration_time = 10
 
 # Initial values for mins and maxs
 minimums = list(lsm.magnetometer())
 maximums = list(lsm.magnetometer())
 
+#Create a CSV file and writer instance
+with open('gauss.csv', 'w') as file:
+    writer = csv.writer(file)
+    writer.writerow(["gaussX", "gaussZ", "gaussY"])
+
 # Run calibration until time limit is reached
 while t_elapsed < calibration_time:
     mag = lsm.magnetometer()
+    print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
+    with open('gauss.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow(xyz[0:3])
     for i in range(len(mag)):
         if mag[i] < minimums[i]:  # Set new min
             minimums[i] = mag[i]
