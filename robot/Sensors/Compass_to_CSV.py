@@ -76,7 +76,7 @@ while t_elapsed < calibration_time:
     print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
     with open('gauss.csv', 'a') as file:
         writer = csv.writer(file)
-        writer.writerow(xyz[0:3])
+        writer.writerow(mag[0:3])
     for i in range(len(mag)):
         if mag[i] < minimums[i]:  # Set new min
             minimums[i] = mag[i]
