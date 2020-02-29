@@ -73,7 +73,7 @@ with open('gauss.csv', 'w') as file:
 # Run calibration until time limit is reached
 while t_elapsed < calibration_time:
     mag = lsm.magnetometer()
-    print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*xyz))
+    print(("{:+06.2f} : {:+06.2f} : {:+06.2f}").format(*mag))
     with open('gauss.csv', 'a') as file:
         writer = csv.writer(file)
         writer.writerow(mag[0:3])
