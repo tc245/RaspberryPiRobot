@@ -223,6 +223,11 @@ light_on = False
 
 #Compass
 offsets = [0.08085445, 0, 0.08645489]
+# Python 2/3 compatibility
+try:
+    input = raw_input
+except NameError:
+    pass
 input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
 
 # Zero point for the compass
