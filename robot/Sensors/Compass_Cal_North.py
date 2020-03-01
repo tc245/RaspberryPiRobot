@@ -46,7 +46,7 @@ north = [-0.031644020326845386, 0.379422205900355, -0.14343860893744645]
 for i in range(len(north)):
     north[i] = north[i] - offsets[i]
 # Calculate the heading from the vector
-north_rad = math.atan2(north[Y], north[X])
+north_rad = math.atan2(north[0], north[2])
 if north_rad < 0:
     north_rad += (2 * math.pi)
 # Convert radian value to degrees
