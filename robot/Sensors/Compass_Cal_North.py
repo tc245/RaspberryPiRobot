@@ -41,14 +41,12 @@ except NameError:
 # Precalculated offsets from calibration exercise
 offsets = [0.08085445, 0, 0.08645489]
 
-input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
-
 # Zero point for the compass
 north = [-0.031644020326845386, 0.379422205900355, -0.14343860893744645]
 for i in range(len(north)):
     north[i] = north[i] - offsets[i]
 # Calculate the heading from the vector
-north_rad = math.atan2(mag[Y], mag[X])
+north_rad = math.atan2(north[Y], north[X])
 if north_rad < 0:
     north_rad += (2 * math.pi)
 # Convert radian value to degrees
