@@ -42,8 +42,6 @@ except NameError:
 # Precalculated offsets from calibration exercise
 offsets = [0.08085445, 0, 0.08645489]
 
-input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
-
 # Zero point for the compass
 # Get the magnetometer's values
 gauss_zero = [-0.029379361249846976, 0.3781368588566532, -0.14215326189374466]
