@@ -47,7 +47,7 @@ offsets = [0.08085445, 0, 0.08645489]
 gauss_zero = [-0.029379361249846976, 0.3781368588566532, -0.14215326189374466]
 
 # Calculate the heading from the vector
-zero_heading = math.atan2(gauss_zero[Y], gauss_zero[X])
+zero_heading = math.atan2(gauss_zero[0], gauss_zero[2])
 
 if zero_heading < 0:
     zero_heading += (2 * math.pi)
