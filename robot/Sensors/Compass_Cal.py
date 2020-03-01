@@ -50,6 +50,6 @@ zero = raw_heading()
 input("Press a key to begin readings!\n")
 
 while True:
-    rh = raw_heading(minimums, maximums, zero=zero)
+    rh = raw_heading(zero=zero)
     print(rh)
     time.sleep(0.2)
