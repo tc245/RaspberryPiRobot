@@ -45,8 +45,8 @@ input("Set a zero (North) point, then turn your breakout to that point and press
 
 # Zero point for the compass
 north = [-0.031644020326845386, 0.379422205900355, -0.14343860893744645]
-    for i in range(len(north)):
-        north[i] = north[i] - offsets[i]
+for i in range(len(north)):
+    north[i] = north[i] - offsets[i]
 # Calculate the heading from the vector
 north_rad = math.atan2(mag[Y], mag[X])
 if north_rad < 0:
