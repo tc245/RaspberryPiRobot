@@ -23,3 +23,19 @@ for i in range(len(mag)):
 
 print(mag)
 
+
+# Calculate the heading from the vector
+heading = math.atan2(mag[Y], mag[X])
+
+if heading < 0:
+    heading += (2 * math.pi)
+
+# Convert radian value to degrees
+heading_degrees = (round(math.degrees(heading), 2)) % 360
+
+print(heading_degrees)
+
+
+
+
+
