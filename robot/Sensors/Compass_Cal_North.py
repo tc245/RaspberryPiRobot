@@ -50,7 +50,7 @@ north_rad = math.atan2(north[0], north[2])
 if north_rad < 0:
     north_rad += (2 * math.pi)
 # Convert radian value to degrees
-zero = (round(math.degrees(heading), 2) - zero) % 360
+zero = (round(math.degrees(north_rad), 2) - zero) % 360
 
 input("Press a key to begin readings!\n")
 
