@@ -210,6 +210,7 @@ horn_button = 12        # Button number for Horn
 disco_button = 2        # Button number for disco mode
 light_button = 3        # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
+compass_button = 0      # Button to display compass heading
 #Other settings
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
 
@@ -281,6 +282,10 @@ while not done:
                     PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = True
+
+            elif joystick.get_button(compass_button): #Display compass heading
+                rh = raw_heading(zero=zero)
+                print(rh)
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
