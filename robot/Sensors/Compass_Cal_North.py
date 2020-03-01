@@ -30,6 +30,7 @@ def raw_heading(zero=0):
 
     return heading_degrees
 
+
 lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
 
 # Python 2/3 compatibility
@@ -41,16 +42,20 @@ except NameError:
 # Precalculated offsets from calibration exercise
 offsets = [0.08085445, 0, 0.08645489]
 
+input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
+
 # Zero point for the compass
-north = [-0.031644020326845386, 0.379422205900355, -0.14343860893744645]
-for i in range(len(north)):
-    north[i] = north[i] - offsets[i]
+# Get the magnetometer's values
+gauss_zero = [-0.029379361249846976, 0.3781368588566532, -0.14215326189374466]
+
 # Calculate the heading from the vector
-north_rad = math.atan2(north[0], north[2])
-if north_rad < 0:
-    north_rad += (2 * math.pi)
+zero_heading = math.atan2(gauss_zero[Y], gauss_zero[X])
+
+if zero_heading < 0:
+    zero_heading += (2 * math.pi)
+
 # Convert radian value to degrees
-zero = (round(math.degrees(north_rad), 2)) % 360
+zero = (round(math.degrees(zero_heading), 2)) % 360
 
 input("Press a key to begin readings!\n")
 
