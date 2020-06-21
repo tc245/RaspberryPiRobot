@@ -5,6 +5,7 @@ Created on Sun Jun 21 18:18:45 2020
 @author: tclemens
 """
 
+import sys
 sys.path.append('/home/pi/HUSKYLENSPython')
 from huskylensPythonLibrary import HuskyLensLibrary
 
