@@ -6,7 +6,7 @@ Created on Sun Jun 21 18:18:45 2020
 """
 
 import sys
-sys.path.append('/home/pi/HUSKYLENSPython')
+sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 
 husky= HuskyLensLibrary("I2C","",address=0x32)
