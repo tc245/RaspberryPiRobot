@@ -58,6 +58,12 @@ from subprocess import call
 import picamera
 from datetime import datetime
 from lsm303d import LSM303D
+import sys
+sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
+from huskylensPythonLibrary import HuskyLensLibrary
+sys.path.append('/home/pi/thunderborg')
+import ThunderBorg3 as ThunderBorg
+
 
 #Define function to generate a compass heading
 def raw_heading(zero=0):
@@ -83,12 +89,6 @@ def raw_heading(zero=0):
     heading_degrees = (round(math.degrees(heading), 2) - zero) % 360
 
     return heading_degrees
-
-sys.path.append('/home/pi/thunderborg')
-import ThunderBorg
-
-#mount NAS
-call(["sudo", "mount", "-a"])
 
 #Sound test
 #call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
