@@ -144,13 +144,13 @@ else:
 # Show battery monitoring settings
 battMin, battMax = TB.GetBatteryMonitoringLimits()
 battCurrent = TB.GetBatteryReading()
-print 'Battery monitoring settings:'
-print '    Minimum  (red)     %02.2f V' % (battMin)
-print '    Half-way (yellow)  %02.2f V' % ((battMin + battMax) / 2)
-print '    Maximum  (green)   %02.2f V' % (battMax)
-print
-print '    Current voltage    %02.2f V' % (battCurrent)
-print
+#print 'Battery monitoring settings:'
+#print '    Minimum  (red)     %02.2f V' % (battMin)
+#print '    Half-way (yellow)  %02.2f V' % ((battMin + battMax) / 2)
+#print '    Maximum  (green)   %02.2f V' % (battMax)
+#print
+#print '    Current voltage    %02.2f V' % (battCurrent)
+#print
 
 # Setup pygame and wait for the joystick to become available
 TB.MotorsOff()
