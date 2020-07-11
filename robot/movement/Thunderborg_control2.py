@@ -156,9 +156,9 @@ battCurrent = TB.GetBatteryReading()
 TB.MotorsOff()
 TB.SetLedShowBattery(False)
 TB.SetLeds(0,0,1)
-#os.environ["SDL_VIDEODRIVER"] = "dummy" # Removes the need to have a GUI window
+os.environ["SDL_VIDEODRIVER"] = "dummy" # Removes the need to have a GUI window
 pygame.init()
-#pygame.display.set_mode((1,1))
+pygame.display.set_mode((1,1))
 #and the pygame mixer
 pygame.mixer.init()
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
@@ -260,7 +260,7 @@ while not done:
 
 
             elif joystick.get_button(camera_button): #camera and 
-                os.chdir("/home/pi/Pictures")
+                os.chdir("/home/pi/RaspberryPiStorage/Robot/Pictures/")
                 d = datetime.now() #Collect time stamp when picture taken
                 year = str(d.year)
                 month = str(d.month)
