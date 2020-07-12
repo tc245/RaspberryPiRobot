@@ -74,18 +74,22 @@ try:
         while not is_object_centred(husky):
             if husky.command_request()[0][0] < 150:
                 PT.pan(calculate_pantilt_angle()[0])
+                print(PT.get_pan())
                 time.sleep(0.5)
             
             if husky.command_request()[0][0] > 170:
                 PT.pan(0-calculate_pantilt_angle()[0])
+                print(PT.get_pan())
                 time.sleep(0.5)
                 
             if husky.command_request()[0][1] < 110:
                 PT.tilt(calculate_pantilt_angle()[1])
-                time.sleep(0.5)
+                print(PT.get_tilt())
+                time.sleep(0.5)x
             
             if husky.command_request()[0][1] > 130:
                 PT.tilt(calculate_pantilt_angle()[1])
+                print(PT.get_tilt())
                 time.sleep(0.5)
         
 except IndexError:
