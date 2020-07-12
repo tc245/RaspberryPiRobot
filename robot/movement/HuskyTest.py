@@ -23,20 +23,25 @@ input("Place an object in the centre of the huskylens camera")
 xb=husky.command_request()[0][0]
 yb=husky.command_request()[0][1]
 
-while True:
-    if not husky.command_request_blocks():
+Try:
+    while True:
+        if not husky.command_request_blocks():
+            print("No objects in camera")
+        
+        elif husky.command_request_blocks():
+            
+            if husky.command_request()[0][0] < xb-5:
+                print("Robot pointing right")
+        
+            elif husky.command_request()[0][0] > xb+5:
+                print("Robot pointing left")
+            
+            elif husky.command_request()[0][0] in range((xb-5), (xb+5)):
+                print("Robot pointing ahead")
+        
+        time.sleep(0.2)
+        
+    Except IndexError:
         print("No objects in camera")
-    
-    elif husky.command_request_blocks():
         
-        if husky.command_request()[0][0] < xb-5:
-            print("Robot pointing right")
-    
-        elif husky.command_request()[0][0] > xb+5:
-            print("Robot pointing left")
-        
-        elif husky.command_request()[0][0] in range((xb-5), (xb+5)):
-            print("Robot pointing ahead")
-    
-    time.sleep(0.2)    
     
