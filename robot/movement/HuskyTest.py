@@ -28,7 +28,7 @@ while True:
     
     elif husky.command_request():
         
-        elif husky.command_request()[0][0] < xb-5:
+        if husky.command_request()[0][0] < xb-5:
             print("Robot pointing right")
     
         elif husky.command_request()[0][0] > xb+5:
