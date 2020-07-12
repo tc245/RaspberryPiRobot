@@ -15,16 +15,27 @@ sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 import time
 import pantilthat
+import math
 
 #Instances
 husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 PT=pantilthat.PanTilt()
 
+#Variables
+pan=0 #camera pan angle
+tilt=0 # camera tilt angle
+x_coords_range = 150 #Range of x coordinates
+y_coords_range = 110
+pan_range = 75
+tilt_range = 75
+
 #Centre the camera
-pan=0
-tilt=0
 PT.tilt(tilt)
 PT.pan(pan)
+
+###########
+#Functions#
+###########
 
 #Function to determine if object is centred
 def is_object_centred(husky_object):
@@ -42,7 +53,14 @@ def is_object_centred(husky_object):
         return False
         time.sleep(0.5)
 
-#Get baseline values
+#Function to calculate pan angle
+def calculate_pantilt_angle():
+    angles = []
+    angles[0] = ((math.log(pan_range))/150)*husky.command_request()[0][0]
+    angles[1] = ((math.log(tilt_range))/150)*husky.command_request()[0][1]
+    return angles
+
+#Set-up 
 input(""""Place an object in the huskylens camera frame
       and register it using the camera buttons.
       """)
@@ -55,19 +73,19 @@ try:
         
         while not is_object_centred(husky):
             if husky.command_request()[0][0] < 150:
-                PT.pan(PT.get_pan()+5)
+                PT.pan(calculate_pantilt_angle()[0])
                 time.sleep(0.5)
             
             if husky.command_request()[0][0] > 170:
-                PT.pan(PT.get_pan()-5)
+                PT.pan(0-calculate_pantilt_angle()[0])
                 time.sleep(0.5)
                 
             if husky.command_request()[0][1] < 110:
-                PT.tilt(PT.get_tilt()-5)
+                PT.tilt(calculate_pantilt_angle()[1])
                 time.sleep(0.5)
             
             if husky.command_request()[0][1] > 130:
-                PT.tilt(PT.get_tilt()+5)
+                PT.tilt(calculate_pantilt_angle()[1])
                 time.sleep(0.5)
         
 except IndexError:
