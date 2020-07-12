@@ -41,7 +41,7 @@ try:
         
         time.sleep(0.2)
         
-    Except IndexError:
+    except IndexError:
         print("No objects in camera")
         
     
