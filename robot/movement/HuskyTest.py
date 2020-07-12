@@ -26,7 +26,7 @@ while True:
     if not husky.command_request_blocks():
         print("No objects in camera")
     
-    elif husky.command_request_blocks() = True:
+    elif husky.command_request_blocks() == True:
         
         if husky.command_request()[0][0] < xb-5:
             print("Robot pointing right")
