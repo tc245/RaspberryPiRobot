@@ -40,8 +40,8 @@ PT.pan(pan)
 #Function to determine if object is centred
 def is_object_centred(husky_object):
     try:
-        x=husky_object.command_request()[0][0]
-        y=husky_object.command_request()[0][1]
+        x=husky_object.command_request_blocks()[0][0]
+        y=husky_object.command_request_blocks()[0][1]
         
         if x not in range(150,170) or y not in range(110,130):
             return False
@@ -56,8 +56,8 @@ def is_object_centred(husky_object):
 #Function to calculate pan angle
 def calculate_pantilt_angle():
     angles = []
-    angles[0] = ((math.log(pan_range))/150)*husky.command_request()[0][0]
-    angles[1] = ((math.log(tilt_range))/150)*husky.command_request()[0][1]
+    angles[0] = ((math.log(pan_range))/150)*husky.command_request_blocks()[0][0]
+    angles[1] = ((math.log(tilt_range))/150)*husky.command_request_blocks()[0][1]
     return angles
 
 #Set-up 
@@ -72,22 +72,22 @@ try:
             pass
         
         while not is_object_centred(husky):
-            if husky.command_request()[0][0] < 150:
+            if husky.command_request_blocks()[0][0] < 150:
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(0.5)
             
-            if husky.command_request()[0][0] > 170:
+            if husky.command_request_blocks()[0][0] > 170:
                 PT.pan(0-calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(0.5)
                 
-            if husky.command_request()[0][1] < 110:
+            if husky.command_request_blocks()[0][1] < 110:
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
                 time.sleep(0.5)
             
-            if husky.command_request()[0][1] > 130:
+            if husky.command_request_blocks()[0][1] > 130:
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
                 time.sleep(0.5)
