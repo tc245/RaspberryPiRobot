@@ -92,6 +92,7 @@ while True:
                 print(PT.get_tilt())
                 time.sleep(0.5)
         
-    except IndexError:
-        print("No object in frame")
+    except Exception as e:
+        print(e)
+        time.sleep(1)
         
