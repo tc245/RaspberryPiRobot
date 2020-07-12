@@ -61,8 +61,8 @@ def is_object_centred(husky_object):
 #Function to calculate pan angle
 def calculate_pantilt_angle():
     angles = []
-    angles.append(((math.log(pan_range))/x_coords_range)*((husky.command_request_blocks()[0][0]-x_max)+x_mid))
-    angles.append(((math.log(tilt_range))/y_coords_range)*((husky.command_request_blocks()[0][1]-y_max)+y_mid))
+    angles.append(math.exp(((math.log(pan_range))/x_coords_range)*((husky.command_request_blocks()[0][0]-x_max)+x_mid)))
+    angles.append(math.exp(((math.log(tilt_range))/y_coords_range)*((husky.command_request_blocks()[0][1]-y_max)+y_mid)))
     return angles
 
 #Set-up 
