@@ -23,11 +23,11 @@ def is_object_centred(husky_object):
     x=husky_object.command_request()[0][0]
     y=husky_object.command_request()[0][1]
     
-    if x in range(150,170) and y in range(110,130):
-        return True
-    
-    elif x not in range(150,170) and y not in range(110,130):
+    if x not in range(150,170) or y not in range(110,130):
         return False
+    
+    elif x in range(150,170) and y in range(110,130):
+        return True
 
 #Get baseline values
 input("Place an object in the centre of the huskylens camera")
