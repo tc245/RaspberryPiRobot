@@ -19,6 +19,7 @@ import time
 husky=HuskyLensLibrary("I2C","",address=0x32)
 
 #Get baseline values
+input("Place an object in the centre of the huskylens camera")
 xb=husky.command_request()[0][0]
 yb=husky.command_request()[0][1]
 
