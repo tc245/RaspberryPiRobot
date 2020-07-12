@@ -41,7 +41,7 @@ def is_object_centred(husky_object):
         time.sleep(0.5)
 
 #Get baseline values
-input(""""Place an object in the centre of the huskylens camera
+input(""""Place an object in the huskylens camera frame
       and register it using the camera buttons.
       """)
 
