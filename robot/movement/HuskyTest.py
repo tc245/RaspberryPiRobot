@@ -35,7 +35,7 @@ while True:
         elif husky.command_request()[0][0] > xb+5:
             print("Robot pointing left")
         
-        else:
+        elif husky.command_request()[0][0] in range((xb-5), (xb+5)):
             print("Robot pointing ahead")
     
     time.sleep(0.2)    
