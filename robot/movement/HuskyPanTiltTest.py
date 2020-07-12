@@ -85,7 +85,7 @@ try:
             if husky.command_request()[0][1] < 110:
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
-                time.sleep(0.5)x
+                time.sleep(0.5)
             
             if husky.command_request()[0][1] > 130:
                 PT.tilt(calculate_pantilt_angle()[1])
