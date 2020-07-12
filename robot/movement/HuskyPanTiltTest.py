@@ -66,8 +66,8 @@ input(""""Place an object in the huskylens camera frame
       """)
 
 #Main Loop
-try:
-    while True:
+while True:
+    try:
         while is_object_centred(husky):
             pass
         
@@ -92,6 +92,6 @@ try:
                 print(PT.get_tilt())
                 time.sleep(0.5)
         
-except IndexError:
-    print("No object in frame")
+    except IndexError:
+        print("No object in frame")
         
