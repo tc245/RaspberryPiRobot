@@ -21,8 +21,10 @@ husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 PT=pantilthat.PanTilt()
 
 #Centre the camera
-PT.tilt(0)
-PT.pan(0)
+pan=0
+tilt=0
+PT.tilt(tilt)
+PT.pan(pan)
 
 #Function to determine if object is centred
 def is_object_centred(husky_object):
@@ -56,16 +58,16 @@ try:
                 PT.pan(PT.get_pan()+5)
                 time.sleep(0.5)
             
-            if husky.command_request()[0][0] >170:
+            if husky.command_request()[0][0] > 170:
                 PT.pan(PT.get_pan()-5)
                 time.sleep(0.5)
                 
             if husky.command_request()[0][1] < 110:
-                PT.pan(PT.get_tilt()+5)
+                PT.tilt(PT.get_tilt()+5)
                 time.sleep(0.5)
             
-            if husky.command_request()[0][1] >130:
-                PT.pan(PT.get_tilt()-5)
+            if husky.command_request()[0][1] > 130:
+                PT.tilt(PT.get_tilt()-5)
                 time.sleep(0.5)
         
 except IndexError:
