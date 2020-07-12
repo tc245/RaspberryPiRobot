@@ -31,8 +31,8 @@ x_mid = 160
 y_mid = 120
 x_max = 320
 y_max = 240
-pan_range = 75
-tilt_range = 75
+pan_range = math.log(75)
+tilt_range = math.log(75)
 
 #Centre the camera
 PT.tilt(tilt)
@@ -61,20 +61,24 @@ def is_object_centred(husky_object):
 #Function to calculate pan angle
 def calculate_pantilt_angle():
     angles = []
-    angles.append(math.exp
-                  (((math.log(pan_range))
-                    /x_coords_range)*
-                   ((husky.command_request_blocks()[0][0]-x_max)+x_mid))
-                  )
+    x=((pan_range/x_coords_range)*((husky.command_request_blocks()[0][0]-x_max)+x_mid))
+    y=((tilt_range/y_coords_range)*((husky.command_request_blocks()[0][1]-y_max)+y_mid))
+
+    if x > 0:
+        x=math.exp(x)
     
-    angles.append(math.exp
-                  (((math.log(tilt_range))
-                    /y_coords_range)*
-                   ((husky.command_request_blocks()[0][1]-y_max)+y_mid))
-                  )
-    
-    [-i for i in angles]
-    
+    elif y > 0:
+        y=math.exp(y)
+        
+    elif x < 0:
+        x=0-(math.exp(x))
+        
+    elif y < 0:
+        y=0-(math.exp(y))
+        
+    angles.append(x)
+    angles.append(y)
+
     return angles
 
 #Set-up 
@@ -94,28 +98,28 @@ while True:
             if husky.command_request_blocks()[0][0] < 150:
                 print("object in left of frame{}".format(calculate_pantilt_angle()[0]))
                 print(calculate_pantilt_angle()[0])
-                #PT.pan(calculate_pantilt_angle()[0])
+                PT.pan(calculate_pantilt_angle()[0])
                 #print(PT.get_pan())
                 time.sleep(interval)
             
             if husky.command_request_blocks()[0][0] > 170:
                 print("object in right of frame{}".format(calculate_pantilt_angle()[0]))
                 print(calculate_pantilt_angle()[0])
-                #PT.pan(calculate_pantilt_angle()[0])
+                PT.pan(calculate_pantilt_angle()[0])
                 #print(PT.get_pan())
                 time.sleep(interval)
                 
             if husky.command_request_blocks()[0][1] < 110:
                 print("object in top half of frame{}".format(calculate_pantilt_angle()[1]))
                 print(calculate_pantilt_angle()[1])
-                #PT.tilt(calculate_pantilt_angle()[1])
+                PT.tilt(calculate_pantilt_angle()[1])
                 #print(PT.get_tilt())
                 time.sleep(interval)
             
             if husky.command_request_blocks()[0][1] > 130:
                 print("object in bottom half of frame{}".format(calculate_pantilt_angle()[1]))
                 print(calculate_pantilt_angle()[1])
-                #PT.tilt(calculate_pantilt_angle()[1])
+                PT.tilt(calculate_pantilt_angle()[1])
                 #print(PT.get_tilt())
                 time.sleep(interval)
         
