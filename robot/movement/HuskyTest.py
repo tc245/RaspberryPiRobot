@@ -23,8 +23,8 @@ input("Place an object in the centre of the huskylens camera")
 xb=husky.command_request()[0][0]
 yb=husky.command_request()[0][1]
 
-try:
-    while True:
+while True:
+    try:
         if not husky.command_request_blocks():
             print("No objects in camera")
         
