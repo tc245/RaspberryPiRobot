@@ -22,7 +22,7 @@ husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 PT=pantilthat.PanTilt()
 
 #Variables
-interval = 1
+interval = 0.2
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 160 #Range of x coordinates
@@ -79,25 +79,25 @@ while True:
         
         while not is_object_centred(husky):
             print("Object NOT centred in frame")
-            if husky.command_request_blocks()[0][0] < 150:
+            if husky.command_request_blocks()[0][0] > 150:
                 print("object in left of frame{}".format(calculate_pantilt_angle()[0]))
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(interval)
             
-            if husky.command_request_blocks()[0][0] > 170:
+            if husky.command_request_blocks()[0][0] < 170:
                 print("object in right of frame{}".format(calculate_pantilt_angle()[0]))
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(interval)
                 
-            if husky.command_request_blocks()[0][1] < 110:
+            if husky.command_request_blocks()[0][1] > 110:
                 print("object in top half of frame{}".format(calculate_pantilt_angle()[1]))
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
                 time.sleep(interval)
             
-            if husky.command_request_blocks()[0][1] > 130:
+            if husky.command_request_blocks()[0][1] < 130:
                 print("object in bottom half of frame{}".format(calculate_pantilt_angle()[1]))
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
