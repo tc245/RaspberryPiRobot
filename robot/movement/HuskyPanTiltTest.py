@@ -52,16 +52,16 @@ try:
             pass
         
         while not is_object_centred(husky):
-            if husky_object.command_request()[0][0] < 150:
+            if husky.command_request()[0][0] < 150:
                 PT.pan(PT.get_pan()+1)
             
-            if husky_object.command_request()[0][0] >170:
+            if husky.command_request()[0][0] >170:
                 PT.pan(PT.get_pan()-1)
                 
-            if husky_object.command_request()[0][1] < 110:
+            if husky.command_request()[0][1] < 110:
                 PT.pan(PT.get_tilt()+1)
             
-            if husky_object.command_request()[0][1] >130:
+            if husky.command_request()[0][1] >130:
                 PT.pan(PT.get_tilt()-1)
         
 except IndexError:
