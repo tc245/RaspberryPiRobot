@@ -40,6 +40,7 @@ while True:
         
     except IndexError:
         print("No objects in camera")
+        time.sleep(0.5)
         
 
     
