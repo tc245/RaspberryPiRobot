@@ -34,7 +34,7 @@ input("Place an object in the centre of the huskylens camera")
 
 while True:
     try:
-        center=is_object_centred(husky))
+        center=is_object_centred(husky)
         print(output)
         time.sleep(0.5)
         
