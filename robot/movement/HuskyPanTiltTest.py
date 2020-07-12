@@ -79,25 +79,25 @@ while True:
         while not is_object_centred(husky):
             print("Object NOT centred in frame")
             if husky.command_request_blocks()[0][0] < 150:
-                print("object in left of frame")    
+                print("object in left of frame{}".format(calculate_pantilt_angle()[0]))
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(0.5)
             
             if husky.command_request_blocks()[0][0] > 170:
-                print("object in right of frame") 
+                print("object in right of frame{}".format(calculate_pantilt_angle()[0]))
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(0.5)
                 
             if husky.command_request_blocks()[0][1] < 110:
-                print("object in top half of frame") 
+                print("object in top half of frame{}".format(calculate_pantilt_angle()[1]))
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
                 time.sleep(0.5)
             
             if husky.command_request_blocks()[0][1] > 130:
-                print("object in bottom half of frame") 
+                print("object in bottom half of frame{}".format(calculate_pantilt_angle()[1]))
                 PT.tilt(calculate_pantilt_angle()[1])
                 print(PT.get_tilt())
                 time.sleep(0.5)
