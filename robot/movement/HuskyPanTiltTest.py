@@ -63,11 +63,11 @@ try:
                 time.sleep(0.5)
                 
             if husky.command_request()[0][1] < 110:
-                PT.tilt(PT.get_tilt()+1)
+                PT.tilt(PT.get_tilt()-1)
                 time.sleep(0.5)
             
             if husky.command_request()[0][1] > 130:
-                PT.tilt(PT.get_tilt()-1)
+                PT.tilt(PT.get_tilt()+1)
                 time.sleep(0.5)
         
 except IndexError:
