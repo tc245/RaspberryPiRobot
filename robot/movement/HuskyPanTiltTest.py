@@ -14,9 +14,15 @@ import sys
 sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 import time
+import pantilthat
 
-#Husky object
-husky=HuskyLensLibrary("I2C","",address=0x32)
+#Instances
+husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
+PT=pantilthat.PanTilt()
+
+#Centre the camera
+PT.tilt(0)
+PT.pan(0)
 
 #Function to determine if object is centred
 def is_object_centred(husky_object):
@@ -35,9 +41,29 @@ def is_object_centred(husky_object):
         time.sleep(0.5)
 
 #Get baseline values
-input("Place an object in the centre of the huskylens camera")
+input(""""Place an object in the centre of the huskylens camera
+      and register it using the camera buttons.
+      """)
 
-while True:
-    print(is_object_centred(husky))
-    time.sleep(0.5)
+#Main Loop
+try:
+    while True:
+        while is_object_centred(husky):
+            pass
+        
+        while not is_object_centred(husky):
+            if husky_object.command_request()[0][0] < 150:
+                PT.pan(PT.get_pan()+1)
+            
+            if husky_object.command_request()[0][0] >170:
+                PT.pan(PT.get_pan()-1)
+                
+            if husky_object.command_request()[0][1] < 110:
+                PT.pan(PT.get_tilt()+1)
+            
+            if husky_object.command_request()[0][1] >130:
+                PT.pan(PT.get_tilt()-1)
+        
+except IndexError:
+    print("No object in frame")
         
