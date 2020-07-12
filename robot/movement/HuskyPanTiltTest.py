@@ -54,15 +54,19 @@ try:
         while not is_object_centred(husky):
             if husky.command_request()[0][0] < 150:
                 PT.pan(PT.get_pan()+5)
+                time.sleep(0.5)
             
             if husky.command_request()[0][0] >170:
                 PT.pan(PT.get_pan()-5)
+                time.sleep(0.5)
                 
             if husky.command_request()[0][1] < 110:
                 PT.pan(PT.get_tilt()+5)
+                time.sleep(0.5)
             
-            if husky    .command_request()[0][1] >130:
+            if husky.command_request()[0][1] >130:
                 PT.pan(PT.get_tilt()-5)
+                time.sleep(0.5)
         
 except IndexError:
     print("No object in frame")
