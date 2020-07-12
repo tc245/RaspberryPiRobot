@@ -69,9 +69,11 @@ input(""""Place an object in the huskylens camera frame
 while True:
     try:
         while is_object_centred(husky):
-            pass
+            print("Object centred in frame")
+            time.sleep(1)
         
         while not is_object_centred(husky):
+            print("Object NOT centred in frame")
             if husky.command_request_blocks()[0][0] < 150:
                 PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
