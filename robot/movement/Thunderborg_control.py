@@ -166,7 +166,7 @@ horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 
 #set up the compass
-lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
+#lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
 # Precalculated offsets from calibration exercise
 
 #Blinking LEDs to show controller not connected
@@ -223,20 +223,20 @@ PT.show()
 light_on = False
 
 #Compass
-offsets = [0.08085445, 0, 0.08645489]
+#offsets = [0.08085445, 0, 0.08645489]
 # Python 2/3 compatibility
-try:
-    input = raw_input
-except NameError:
-    pass
-input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
+#try:
+#    input = raw_input
+#except NameError:
+#    pass
+#input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
 
 # Zero point for the compass
-zero = raw_heading()
+#zero = raw_heading()
 
 #Test heading
-rh = raw_heading(zero=zero)
-print(rh)
+#rh = raw_heading(zero=zero)
+#print(rh)
 
 # -------- Main Program Loop -----------
 while not done:

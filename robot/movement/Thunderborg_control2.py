@@ -64,6 +64,7 @@ from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 
+print("Robot activated at {}".datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 
 #Define function to generate a compass heading
 def raw_heading(zero=0):
@@ -383,6 +384,7 @@ goodbye.play()
 time.sleep(goodbye_length)
 led1_pi.off()
 led2_pi.off()
+print("Robot terminated at {}".datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 os.system("sudo shutdown -h now")              
 
 
