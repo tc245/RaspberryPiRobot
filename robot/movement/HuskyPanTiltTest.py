@@ -26,6 +26,10 @@ pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 75 #Range of x coordinates
 y_coords_range = 55
+x_mid = 320/2
+y_mid = 240/2
+x_max = 320
+y_max = 240
 pan_range = 75
 tilt_range = 75
 
@@ -56,8 +60,8 @@ def is_object_centred(husky_object):
 #Function to calculate pan angle
 def calculate_pantilt_angle():
     angles = []
-    angles.append(((math.log(pan_range))/x_coords_range)*husky.command_request_blocks()[0][0])
-    angles.append(((math.log(tilt_range))/y_coords_range)*husky.command_request_blocks()[0][1])
+    angles.append(((math.log(pan_range))/x_coords_range)*((husky.command_request_blocks()[0][0]-x_max)+x_mid))
+    angles.append(((math.log(tilt_range))/y_coords_range)*((husky.command_request_blocks()[0][1]-y_max)+y_mid))
     return angles
 
 #Set-up 
@@ -82,7 +86,7 @@ while True:
             
             if husky.command_request_blocks()[0][0] > 170:
                 print("object in right of frame") 
-                PT.pan(0-calculate_pantilt_angle()[0])
+                PT.pan(calculate_pantilt_angle()[0])
                 print(PT.get_pan())
                 time.sleep(0.5)
                 
