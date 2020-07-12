@@ -24,8 +24,8 @@ PT=pantilthat.PanTilt()
 #Variables
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
-x_coords_range = 150 #Range of x coordinates
-y_coords_range = 110
+x_coords_range = 75 #Range of x coordinates
+y_coords_range = 55
 pan_range = 75
 tilt_range = 75
 
