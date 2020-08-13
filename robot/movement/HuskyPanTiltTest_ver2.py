@@ -38,6 +38,8 @@ Xtarget = 160
 Ytarget = 120
 Yerror = 0
 Xerror = 0
+KP_x = pan_range/x_coords_range
+KP_y = pan_range/y_coords_range
 
 #Centre the camera
 PT.tilt(tilt)
@@ -109,4 +111,9 @@ while True:
     Xerror = Xtarget - husky.command_request_blocks()[0][0]
     Yerror = Ytarget - husky.command_request_blocks()[0][1]
     print("Y error: {}, X error: {}".format(Yerror, Xerror))
-    time.sleep(1)
+    
+    new_y = KP_y * Yerror
+    new_x = KP_x * Xerror
+    print("Y new: {}, X new: {}".format(new_y, new_x))
+    
+    time.sleep(3)
