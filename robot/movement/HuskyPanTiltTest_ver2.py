@@ -112,8 +112,8 @@ while True:
     Yerror = Ytarget - husky.command_request_blocks()[0][1]
     print("Y error: {}, X error: {}".format(Yerror, Xerror))
     
-    new_y = KP_y * Yerror
-    new_x = KP_x * Xerror
+    new_y = (KP_y * Yerror)+PT.get_tilt()
+    new_x = (KP_x * Xerror)+PT.get_pan()
     print("Y new: {}, X new: {}".format(new_y, new_x))
     
     time.sleep(3)
