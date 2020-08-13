@@ -107,8 +107,8 @@ input(""""Place an object in the huskylens camera frame
       """)
 
 #Main Loop
-try:
-    while True:
+while True:
+    try:
         Xerror = Xtarget - husky.command_request_blocks()[0][0]
         Yerror = husky.command_request_blocks()[0][1] - Ytarget
         print("Y error: {}, X error: {}".format(Yerror, Xerror))
@@ -123,4 +123,4 @@ try:
     except Exception as e:
         print(e)
     
-        time.sleep(interval)
+    time.sleep(interval)
