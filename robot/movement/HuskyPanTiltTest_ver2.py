@@ -117,8 +117,8 @@ while True:
         new_x = (KP_x * Xerror)+PT.get_pan()
         print("Y new: {}, X new: {}".format(new_y, new_x))
         
-        PT.pan(new_x)
-        PT.tilt(new_y)
+        #PT.pan(new_x)
+        #PT.tilt(new_y)
     
     except Exception as e:
         print(e)
