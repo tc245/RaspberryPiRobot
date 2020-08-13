@@ -116,4 +116,7 @@ while True:
     new_x = (KP_x * Xerror)+PT.get_pan()
     print("Y new: {}, X new: {}".format(new_y, new_x))
     
-    time.sleep(3)
+    PT.pan(new_x)
+    PT.tilt(new_y)
+    
+    time.sleep(1)
