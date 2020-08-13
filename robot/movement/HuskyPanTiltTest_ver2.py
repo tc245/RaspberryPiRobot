@@ -23,7 +23,7 @@ husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 PT=pantilthat.PanTilt()
 
 #Variables
-interval = 2
+interval = 0.2
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 160 #Range of x coordinates
@@ -119,4 +119,4 @@ while True:
     PT.pan(new_x)
     PT.tilt(new_y)
     
-    time.sleep(1)
+    time.sleep(interval)
