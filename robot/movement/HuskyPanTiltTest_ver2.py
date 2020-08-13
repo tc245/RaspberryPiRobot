@@ -108,8 +108,8 @@ input(""""Place an object in the huskylens camera frame
 
 #Main Loop
 while True:
-    Xerror = Xtarget - husky.command_request_blocks()[0][0]
-    Yerror = Ytarget - husky.command_request_blocks()[0][1]
+    Xerror = husky.command_request_blocks()[0][0] - Xtarget
+    Yerror = husky.command_request_blocks()[0][1] - Ytarget
     print("Y error: {}, X error: {}".format(Yerror, Xerror))
     
     new_y = (KP_y * Yerror)+PT.get_tilt()
