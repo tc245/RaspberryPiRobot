@@ -107,16 +107,20 @@ input(""""Place an object in the huskylens camera frame
       """)
 
 #Main Loop
-while True:
-    Xerror = Xtarget - husky.command_request_blocks()[0][0]
-    Yerror = husky.command_request_blocks()[0][1] - Ytarget
-    print("Y error: {}, X error: {}".format(Yerror, Xerror))
+try:
+    while True:
+        Xerror = Xtarget - husky.command_request_blocks()[0][0]
+        Yerror = husky.command_request_blocks()[0][1] - Ytarget
+        print("Y error: {}, X error: {}".format(Yerror, Xerror))
+        
+        new_y = (KP_y * Yerror)+PT.get_tilt()
+        new_x = (KP_x * Xerror)+PT.get_pan()
+        print("Y new: {}, X new: {}".format(new_y, new_x))
+        
+        PT.pan(new_x)
+        PT.tilt(new_y)
     
-    new_y = (KP_y * Yerror)+PT.get_tilt()
-    new_x = (KP_x * Xerror)+PT.get_pan()
-    print("Y new: {}, X new: {}".format(new_y, new_x))
+    except Exception as e:
+        print(e)
     
-    PT.pan(new_x)
-    PT.tilt(new_y)
-    
-    time.sleep(interval)
+        time.sleep(interval)
