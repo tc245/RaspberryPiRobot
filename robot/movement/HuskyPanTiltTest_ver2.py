@@ -108,7 +108,7 @@ input(""""Place an object in the huskylens camera frame
 
 #Main Loop
 while True:
-    Xerror = husky.command_request_blocks()[0][0] - Xtarget
+    Xerror = Xtarget - husky.command_request_blocks()[0][0]
     Yerror = husky.command_request_blocks()[0][1] - Ytarget
     print("Y error: {}, X error: {}".format(Yerror, Xerror))
     
