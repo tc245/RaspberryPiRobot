@@ -36,6 +36,8 @@ pan_range = math.log(75)#Max range of motion for pan in log units
 tilt_range = math.log(75)#Max range of motion for tilt in log units
 Xtarget = 160
 Ytarget = 120
+Yerror = 0
+Xerror = 0
 
 #Centre the camera
 PT.tilt(tilt)
@@ -104,6 +106,14 @@ input(""""Place an object in the huskylens camera frame
 
 #Main Loop
 while True:
+    Yerror = Ytarget - husky.command_request_blocks()[0][0]
+    Xerror = Xtarget - husky.command_request_blocks()[0][1]
+    print("Y error: {}, X error: {}".format(Yerror, Xerror))
+    time.sleep(1)
+    
+    
+    
+ """   
     try:
         while is_object_centred(husky):
             print("Object centred in frame")
@@ -142,4 +152,6 @@ while True:
     except Exception as e:
         print(e)
         time.sleep(1)
+
+"""
         
