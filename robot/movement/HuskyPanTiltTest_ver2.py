@@ -23,7 +23,7 @@ husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 PT=pantilthat.PanTilt()
 
 #Variables
-interval = 2
+interval = 0.1
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 160 #Range of x coordinates
@@ -38,8 +38,8 @@ Xtarget = 0
 Ytarget = 0
 Yerror = 0
 Xerror = 0
-KP_x = pan_range/x_coords_range
-KP_y = pan_range/y_coords_range
+KP_x = 0.2
+KP_y = 0.2
 
 #Centre the camera
 PT.tilt(tilt)
@@ -117,10 +117,10 @@ while True:
         new_x = (KP_x * Xerror)+PT.get_pan()
         print("Y new: {}, X new: {}".format(new_y, new_x))
         
-        #PT.pan(new_x)
-        #PT.tilt(new_y)
+        PT.pan(new_x)
+        PT.tilt(new_y)
     
     except Exception as e:
         print(e)
     
-    time.sleep(2)
+    time.sleep(interval)
