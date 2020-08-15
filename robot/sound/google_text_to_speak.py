@@ -15,7 +15,8 @@ import os
 
 os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/RaspberryPiRobot/robot/sound/My Project-5c7416a6ce8b.json'")
 
-text = input("""Type the message you want to hear""")
+text = input("""Type the message you want to hear:
+             """)
 
 # Instantiates a client
 client = texttospeech.TextToSpeechClient()
