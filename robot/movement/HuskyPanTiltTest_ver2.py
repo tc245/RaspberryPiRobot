@@ -40,6 +40,8 @@ Yerror = 0
 Xerror = 0
 KP_x = 0.09
 KP_y = 0.09
+X_prev_error = 0
+T_prev_error = 0
 
 #Centre the camera
 PT.tilt(tilt)
