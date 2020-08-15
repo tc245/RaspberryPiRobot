@@ -38,7 +38,7 @@ running = True
 
 TB = ThunderBorg.ThunderBorg()
 
-TB.i2cAddress = 0x0a                  #Board address changed
+TB.i2cAddress = 0x15                  #Board address changed
 TB.Init()
 if not TB.foundChip:
     boards = ThunderBorg.ScanForThunderBorg()
