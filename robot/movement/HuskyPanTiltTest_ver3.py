@@ -34,6 +34,8 @@ PT=pantilthat.PanTilt()
 PT.tilt(0)
 PT.pan(0)
 PT.idle_timeout(2)#disable servo until needed to save power
+PT.light_mode(pantilthat.WS2812)
+PT.light_type(pantilthat.GRBW)
 
 
 #Set-up the thunderborg object
