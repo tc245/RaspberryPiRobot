@@ -120,25 +120,25 @@ while True:
         new_x = (KP_x * Xerror)
         print("Y new: {}, X new: {}".format(new_y, new_x))
         
-        #PT.pan(new_x)
+        #Pan with motors
         if new_x == 0:
             TB.SetMotors(0)
         if new_x < 0:            
-            if new_x > maxPower:
-                TB.SetMotor1(maxPower)
-                TB.SetMotor2(0-maxPower)
-            elif new_x < maxPower:
-                TB.SetMotor1(new_x)
-                TB.SetMotor2(0-new_x)
-            PT.tilt(new_y)
-        elif new_x > 0:            
             if new_x > maxPower:
                 TB.SetMotor1(0-maxPower)
                 TB.SetMotor2(maxPower)
             elif new_x < maxPower:
                 TB.SetMotor1(0-new_x)
                 TB.SetMotor2(new_x)
-            PT.tilt(new_y)
+        elif new_x > 0:            
+            if new_x > maxPower:
+                TB.SetMotor1(maxPower)
+                TB.SetMotor2(0-maxPower)
+            elif new_x < maxPower:
+                TB.SetMotor1(new_x)
+                TB.SetMotor2(0-new_x)
+        #Tilt with pan tilt hat
+        PT.tilt(new_y)
     
     except Exception as e:
         print(e)
