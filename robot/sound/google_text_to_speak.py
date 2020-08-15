@@ -43,9 +43,9 @@ response = client.synthesize_speech(
 
 # The response's audio_content is binary.
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
-with open("output.mp3", "wb") as out:
+with open("output.wav", "wb") as out:
     # Write the response to the output file.
     out.write(response.audio_content)
-    print('Audio content written to file "output.mp3"')
+    print('Audio content written to file "output.wav"')
     
-os.system('mpg321 output.mp3 &')
+os.system('aplay output.wav &')
