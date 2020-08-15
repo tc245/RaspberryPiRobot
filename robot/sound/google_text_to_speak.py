@@ -13,6 +13,8 @@ Note: ssml must be well-formed according to:
 from google.cloud import texttospeech
 import os
 
+os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/RaspberryPiRobot/robot/sound/My Project-5c7416a6ce8b.json'")
+
 text = input("""Type the message you want to hear""")
 
 # Instantiates a client
@@ -39,7 +41,7 @@ response = client.synthesize_speech(
 )
 
 # The response's audio_content is binary.
-os.chdir("/home/pi/RaspberryPiRobot/sound/SoundsRepository/")
+os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
 with open("output.mp3", "wb") as out:
     # Write the response to the output file.
     out.write(response.audio_content)
