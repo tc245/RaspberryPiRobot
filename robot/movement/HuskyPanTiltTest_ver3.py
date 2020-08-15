@@ -142,5 +142,6 @@ while True:
     
     except Exception as e:
         print(e)
+        TB.SetMotors(0)
     
     time.sleep(interval)
