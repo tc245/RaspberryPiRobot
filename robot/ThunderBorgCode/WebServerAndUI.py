@@ -4,7 +4,9 @@
 # Creates a web-page interface for MonsterBorg
 
 # Import library functions we need
-import ThunderBorg
+import sys
+sys.path.append('/home/pi/thunderborg')
+import ThunderBorg3 as ThunderBorg
 import time
 import sys
 import threading
