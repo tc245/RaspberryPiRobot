@@ -27,7 +27,7 @@ synthesis_input = texttospeech.SynthesisInput(text=text)
 # Build the voice request, select the language code ("en-US") and the ssml
 # voice gender ("neutral")
 voice = texttospeech.VoiceSelectionParams(
-    language_code="en-GB", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+    language_code="en-GB-Standard-F", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
 )
 
 # Select the type of audio file you want returned
