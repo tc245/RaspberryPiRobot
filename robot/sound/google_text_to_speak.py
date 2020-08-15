@@ -32,7 +32,7 @@ voice = texttospeech.VoiceSelectionParams(
 
 # Select the type of audio file you want returned
 audio_config = texttospeech.AudioConfig(
-    audio_encoding=texttospeech.AudioEncoding.Linear16
+    audio_encoding=texttospeech.AudioEncoding.LINEAR16
 )
 
 # Perform the text-to-speech request on the text input with the selected
