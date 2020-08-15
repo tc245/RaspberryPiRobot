@@ -21,22 +21,20 @@ sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 import gpiozero
 
-#disable servo until needed to save power
-PT.idle_timeout(2)
+###########
+#Instances#
+###########
 
-#create robot object
-#Set-up the thunderborg object
-TB = ThunderBorg.ThunderBorg()
-TB.i2cAddress = 0x0a
-TB.Init()
-
-#Instances
 #Ai camera
 husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 
 #Pan tilt
 PT=pantilthat.PanTilt()
+#Centre the camera
+PT.tilt(0)
+PT.pan(0)
 PT.idle_timeout(2)#disable servo until needed to save power
+
 
 #Set-up the thunderborg object
 TB = ThunderBorg.ThunderBorg()
@@ -49,8 +47,10 @@ led2_pi = gpiozero.LED(13)
 led1_pi.on()
 led2_pi.on()
 
+############
+#Variables#
+###########
 
-#Variables
 interval = 0.1
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
@@ -81,10 +81,6 @@ if voltageOut > voltageIn:
 else:
     maxPower = voltageOut / float(voltageIn)
 
-#Centre the camera
-PT.tilt(tilt)
-PT.pan(pan)
-
 ###########
 #Functions#
 ###########
@@ -104,7 +100,7 @@ def is_object_centred(husky_object):
     except IndexError:
         return False
 
-#Set-up
+#User Set-up
 input(""""Align your face with the camera and register it using the 
       camera buttons.""")
 

@@ -64,7 +64,7 @@ from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 
-print("Robot activated at {}".datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+print("Robot activated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 
 #Define function to generate a compass heading
 def raw_heading(zero=0):
