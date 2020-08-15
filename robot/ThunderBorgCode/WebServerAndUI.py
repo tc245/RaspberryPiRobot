@@ -393,8 +393,7 @@ try:
         httpServer.handle_request()
 except KeyboardInterrupt:
     # CTRL+C exit
-    print '
-User shutdown'
+    print 'User shutdown'
 finally:
     # Turn the motors off under all scenarios
     TB.MotorsOff()
