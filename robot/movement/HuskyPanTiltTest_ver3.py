@@ -62,11 +62,13 @@ x_max = 320#Max of x coordinates
 y_max = 240#Max of x coordinates
 pan_range = 75 #Max range of motion for pan in log units
 tilt_range = 75 #Max range of motion for tilt in log units
+
+#PID constants
 Xtarget = 0
 Ytarget = 0
 Yerror = 0
 Xerror = 0
-KP_x = 0.09
+KP_x = 0.0045
 KP_y = 0.09
 X_prev_error = 0
 T_prev_error = 0
@@ -114,11 +116,29 @@ while True:
         print("Y error: {}, X error: {}".format(Yerror, Xerror))
         
         new_y = (KP_y * Yerror)+PT.get_tilt()
-        new_x = (KP_x * Xerror)+PT.get_pan()
+        #new_x = (KP_x * Xerror)+PT.get_pan()
+        new_x = (KP_x * Xerror)
         print("Y new: {}, X new: {}".format(new_y, new_x))
         
-        PT.pan(new_x)
-        PT.tilt(new_y)
+        #PT.pan(new_x)
+        if new_x = 0:
+            TB.SetMotors(0)
+        if new_x < 0:            
+            if new_x > maxPower:
+                TB.SetMotor1(maxPower)
+                TB.SetMotor2(0-maxPower)
+            elif new_x < maxPower:
+                TB.SetMotor1(new_x)
+                TB.SetMotor2(0-new_x)
+            PT.tilt(new_y)
+        elif new_x > 0:            
+            if new_x > maxPower:
+                TB.SetMotor1(0-maxPower)
+                TB.SetMotor2(maxPower)
+            elif new_x < maxPower:
+                TB.SetMotor1(0-new_x)
+                TB.SetMotor2(new_x)
+            PT.tilt(new_y)
     
     except Exception as e:
         print(e)
