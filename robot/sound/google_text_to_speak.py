@@ -13,7 +13,7 @@ Note: ssml must be well-formed according to:
 from google.cloud import texttospeech
 import os
 
-os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22'")
+os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22.json'")
 
 text = input("""Type the message you want to hear:
              """)
