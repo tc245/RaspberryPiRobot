@@ -13,7 +13,7 @@ Note: ssml must be well-formed according to:
 from google.cloud import texttospeech
 import os
 
-os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/RaspberryPiRobot/robot/sound/My Project-5c7416a6ce8b.json'")
+os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22'")
 
 text = input("""Type the message you want to hear:
              """)
@@ -32,7 +32,7 @@ voice = texttospeech.VoiceSelectionParams(
 
 # Select the type of audio file you want returned
 audio_config = texttospeech.AudioConfig(
-    audio_encoding=texttospeech.AudioEncoding.MP3
+    audio_encoding=texttospeech.AudioEncoding.Linear16
 )
 
 # Perform the text-to-speech request on the text input with the selected
