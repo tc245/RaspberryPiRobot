@@ -245,202 +245,112 @@ class WebServer(SocketServer.BaseRequestHandler):
             self.send(httpText)
         elif getPath == '/':
             # Main page, click buttons to move and to stop
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function Drive(left, right) {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' var slider = document.getElementById("speed");
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function Drive(left, right) {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' var slider = document.getElementById("speed");'
             httpText += ' left *= speed.value / 100.0;'
             httpText += ' right *= speed.value / 100.0;'
-            httpText += ' iframe.src = "/set/" + left + "/" + right;
-'
-            httpText += '}
-'
-            httpText += 'function Off() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/off";
-'
-            httpText += '}
-'
-            httpText += 'function Photo() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/photo";
-'
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body>
-'
-            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>
-'
-            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>
-'
-            httpText += '<center>
-'
-            httpText += '<button onclick="Drive(-1,1)" style="width:200px;height:100px;"><b>Spin Left</b></button>
-'
-            httpText += '<button onclick="Drive(1,1)" style="width:200px;height:100px;"><b>Forward</b></button>
-'
-            httpText += '<button onclick="Drive(1,-1)" style="width:200px;height:100px;"><b>Spin Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Drive(0,1)" style="width:200px;height:100px;"><b>Turn Left</b></button>
-'
-            httpText += '<button onclick="Drive(-1,-1)" style="width:200px;height:100px;"><b>Reverse</b></button>
-'
-            httpText += '<button onclick="Drive(1,0)" style="width:200px;height:100px;"><b>Turn Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Off()" style="width:200px;height:100px;"><b>Stop</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />
-'
-            httpText += '</center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText += ' iframe.src = "/set/" + left + "/" + right;'
+            httpText += '}'
+            httpText += 'function Off() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/off";'
+            httpText += '}'
+            httpText += 'function Photo() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/photo";'
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body>'
+            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>'
+            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>'
+            httpText += '<center>'
+            httpText += '<button onclick="Drive(-1,1)" style="width:200px;height:100px;"><b>Spin Left</b></button>'
+            httpText += '<button onclick="Drive(1,1)" style="width:200px;height:100px;"><b>Forward</b></button>'
+            httpText += '<button onclick="Drive(1,-1)" style="width:200px;height:100px;"><b>Spin Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Drive(0,1)" style="width:200px;height:100px;"><b>Turn Left</b></button>'
+            httpText += '<button onclick="Drive(-1,-1)" style="width:200px;height:100px;"><b>Reverse</b></button>'
+            httpText += '<button onclick="Drive(1,0)" style="width:200px;height:100px;"><b>Turn Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Off()" style="width:200px;height:100px;"><b>Stop</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />'
+            httpText += '</center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         elif getPath == '/hold':
             # Alternate page, hold buttons to move (does not work with all devices)
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function Drive(left, right) {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' var slider = document.getElementById("speed");
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function Drive(left, right) {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' var slider = document.getElementById("speed");'
             httpText += ' left *= speed.value / 100.0;'
             httpText += ' right *= speed.value / 100.0;'
-            httpText += ' iframe.src = "/set/" + left + "/" + right;
-'
-            httpText += '}
-'
-            httpText += 'function Off() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/off";
-'
-            httpText += '}
-'
-            httpText += 'function Photo() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/photo";
-'
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body>
-'
-            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>
-'
-            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>
-'
-            httpText += '<center>
-'
-            httpText += '<button onmousedown="Drive(-1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Left</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Forward</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onmousedown="Drive(0,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Left</b></button>
-'
-            httpText += '<button onmousedown="Drive(-1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Reverse</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,0)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />
-'
-            httpText += '</center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText += ' iframe.src = "/set/" + left + "/" + right;'
+            httpText += '}'
+            httpText += 'function Off() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/off";'
+            httpText += '}'
+            httpText += 'function Photo() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/photo";'
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body>'
+            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>'
+            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>'
+            httpText += '<center>'
+            httpText += '<button onmousedown="Drive(-1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Left</b></button>'
+            httpText += '<button onmousedown="Drive(1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Forward</b></button>'
+            httpText += '<button onmousedown="Drive(1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onmousedown="Drive(0,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Left</b></button>'
+            httpText += '<button onmousedown="Drive(-1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Reverse</b></button>'
+            httpText += '<button onmousedown="Drive(1,0)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />'
+            httpText += '</center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         elif getPath == '/stream':
             # Streaming frame, set a delayed refresh
             displayDelay = int(1000 / displayRate)
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function refreshImage() {
-'
-            httpText += ' if (!document.images) return;
-'
-            httpText += ' document.images["rpicam"].src = "cam.jpg?" + Math.random();
-'
-            httpText += ' setTimeout("refreshImage()", %d);
-' % (displayDelay)
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body onLoad="setTimeout(\'refreshImage()\', %d)">
-' % (displayDelay)
-            httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function refreshImage() {'
+            httpText += ' if (!document.images) return;'
+            httpText += ' document.images["rpicam"].src = "cam.jpg?" + Math.random();'
+            httpText += ' setTimeout("refreshImage()", %d);' % (displayDelay)
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body onLoad="setTimeout(\'refreshImage()\', %d)">' % (displayDelay)
+            httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         else:
             # Unexpected page
             self.send('Path : "%s"' % (getPath))
 
     def send(self, content):
-        self.request.sendall('HTTP/1.0 200 OK
-
-%s' % (content))
+        self.request.sendall('HTTP/1.0 200 OK %s' % (content))
 
 
 # Create the image buffer frame
