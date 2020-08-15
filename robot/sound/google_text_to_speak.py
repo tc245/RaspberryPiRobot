@@ -12,6 +12,7 @@ Note: ssml must be well-formed according to:
 """
 from google.cloud import texttospeech
 import os
+import sys
 
 os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22.json'")
 
