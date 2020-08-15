@@ -15,11 +15,6 @@ import os
 
 os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22.json'")
 
-"""
-text = input("""Type the message you want to hear:
-             """)
-"""
-
 text = sys.argv[1]
 
 # Instantiates a client
