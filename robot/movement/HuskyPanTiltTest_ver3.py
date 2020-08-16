@@ -130,14 +130,14 @@ while True:
         #Pan with motors
         if Xerror == 0:
             TB.SetMotors(0)
-        if Xerror < 0:            
+        if Xerror > 0:            
             if new_x > maxPower:
                 TB.SetMotor2(0-maxPower)
                 TB.SetMotor1(maxPower)
             elif new_x < maxPower:
                 TB.SetMotor2((new_x)-((new_x)*2))
                 TB.SetMotor1(new_x)
-        elif Xerror > 0:            
+        elif Xerror < 0:            
             if new_x > maxPower:
                 TB.SetMotor2(maxPower)
                 TB.SetMotor1(0-maxPower)
