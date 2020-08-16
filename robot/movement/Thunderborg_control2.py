@@ -384,7 +384,7 @@ goodbye.play()
 time.sleep(goodbye_length)
 led1_pi.off()
 led2_pi.off()
-print("Robot terminated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
+print("Robot terminated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 os.system("sudo shutdown -h now")
 
  
