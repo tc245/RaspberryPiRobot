@@ -159,7 +159,7 @@ TB.SetLedShowBattery(False)
 TB.SetLeds(0,0,1)
 os.environ["SDL_VIDEODRIVER"] = "dummy" # Removes the need to have a GUI window
 pygame.init()
-#pygame.display.set_mode((1,1))
+pygame.display.set_mode((1,1))
 #and the pygame mixer
 pygame.mixer.init()
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
