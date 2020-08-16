@@ -49,7 +49,6 @@ interval = 0.00         # Time between updates in seconds, smaller responds fast
 import time
 import pygame
 import gpiozero
-import numpy
 import math
 import os
 import pantilthat
@@ -58,7 +57,6 @@ from subprocess import call
 import picamera
 from datetime import datetime
 from lsm303d import LSM303D
-import sys
 sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
@@ -162,16 +160,20 @@ pygame.init()
 pygame.display.set_mode((1,1))
 #and the pygame mixer
 pygame.mixer.init()
+#Register the wav files
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
-goodbye = pygame.mixer.Sound("time2die.wav")
+welcome = pygame.mixer.Sound("welcome.wav")
+ps_button = pygame.mixer.Sound("ps_button.wav")
 horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
+goodbye = pygame.mixer.Sound("jovial_goodbye.wav")
 
 #set up the compass
 #lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
 # Precalculated offsets from calibration exercise
 
 #Blinking LEDs to show controller not connected
+welcome.play() #Play welcome speech
 ready = False
 while not ready:
     TB.SetLeds(0,0,1)
@@ -188,6 +190,8 @@ while not ready:
         led1_pi.off()
         led2_pi.off()
         ready = True
+
+ps_button.play() #Play robot ready speech
 
 #Create joystick object
 joystick = pygame.joystick.Joystick(0)
@@ -386,72 +390,3 @@ led1_pi.off()
 led2_pi.off()
 print("Robot terminated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 os.system("sudo shutdown -h now")
-
- 
-
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
-
