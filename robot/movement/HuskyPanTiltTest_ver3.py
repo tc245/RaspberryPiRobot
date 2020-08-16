@@ -115,9 +115,9 @@ name = input("Type your name and press enter")
 #Main Loop
 while True:
     try:
-        Xerror = Xtarget - (husky.command_request_blocks()[0][0]-x_mid)
-        Yerror = (husky.command_request_blocks()[0][1]-y_mid) - Ytarget
-        print("Y error: {}, X error: {}".format(Yerror, Xerror))
+        Xerror = Xtarget + (husky.command_request_blocks()[0][0]-x_mid)
+        Yerror = Ytarget + (husky.command_request_blocks()[0][1]-y_mid)
+        print("X error: {}, Y error: {}".format(Xerror, Yerror))
         
         new_y = (KP_y * Yerror)+PT.get_tilt()
         #new_x = (KP_x * Xerror)+PT.get_pan()
