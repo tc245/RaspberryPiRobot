@@ -122,19 +122,19 @@ while True:
         new_y = (KP_y * Yerror)+PT.get_tilt()
         #new_x = (KP_x * Xerror)+PT.get_pan()
         new_x = (KP_x * Xerror)
-        print("Y new: {}, X new: {}".format(new_y, new_x))
+        print("X new: {}, Y new: {}".format(new_x, new_y))
         
         #Pan with motors
         if Xerror == 0:
             TB.SetMotors(0)
-        if Xerror > 0:            
+        if Xerror < 0:            
             if new_x > maxPower:
                 TB.SetMotor1(0-maxPower)
                 TB.SetMotor2(maxPower)
             elif new_x < maxPower:
                 TB.SetMotor1(0-new_x)
                 TB.SetMotor2(new_x)
-        elif Xerror < 0:            
+        elif Xerror > 0:            
             if new_x > maxPower:
                 TB.SetMotor1(maxPower)
                 TB.SetMotor2(0-maxPower)
