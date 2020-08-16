@@ -117,8 +117,8 @@ while True:
     try:
         tran_x = husky.command_request_blocks()[0][0]-x_mid
         tran_y = husky.command_request_blocks()[0][1]-y_mid
-        Xerror = Xtarget + (tran_x-x_mid)
-        Yerror = Ytarget + (tran_y-y_mid)
+        Xerror = Xtarget + tran_x
+        Yerror = Ytarget + tran_y
         print("X {}, Y {}".format(tran_x, tran_y))
         print("X error: {}, Y error: {}".format(Xerror, Yerror))
         
