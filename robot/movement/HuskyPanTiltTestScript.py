@@ -41,7 +41,7 @@ led1_pi.on()
 led2_pi.on()
 
 #Variables
-interval = 0.1
+interval = 2
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 160 #Range of x coordinates
