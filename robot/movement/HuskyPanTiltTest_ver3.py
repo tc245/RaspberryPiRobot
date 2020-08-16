@@ -31,7 +31,7 @@ husky=HuskyLensLibrary("I2C","",address=0x32)#huskylens
 #Pan tilt
 PT=pantilthat.PanTilt()
 #Centre the camera
-PT.tilt(0)
+PT.tilt(-15)
 PT.pan(0)
 PT.idle_timeout(2)#disable servo until needed to save power
 PT.light_mode(pantilthat.WS2812)
