@@ -37,17 +37,26 @@ while True:
     elif n >= 10 and n < 20:
         print("Loop number: {}".format(n))
         n += 1
-        p1.start() 
+        if p1.is_alive():
+            pass
+        if not p1.is_alive():
+            p1.start() 
         time.sleep(5)
     elif n >= 20 and n < 30:
         print("Loop number: {}".format(n))
         n += 1
-        p1.terminate() 
+        if p1.is_alive():
+            p1.terminate()
+        if not p1.is_alive():
+            pass 
         time.sleep(5)
     elif n >= 30:
         print("Loop number: {}".format(n))
         n += 1
-        p1.start() 
+        if p1.is_alive():
+            p1.terminate()
+        if not p1.is_alive():
+            p1.start()  
         time.sleep(5)
         
         
