@@ -11,7 +11,7 @@ import time
 #Pan tilt
 PT=pantilthat.PanTilt()
 #Centre the camera
-PT.tilt(-40)
+PT.tilt(-15)
 PT.pan(0)
 
 time.sleep(2)
