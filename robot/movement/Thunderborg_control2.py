@@ -261,7 +261,7 @@ while not done:
 
 
             elif joystick.get_button(camera_button): #camera and 
-                os.chdir("/home/pi/RaspberryPiStorage/Robot/Pictures/")
+                os.chdir("/home/pi/RaspberryPiRobot/pictures/")
                 d = datetime.now() #Collect time stamp when picture taken
                 year = str(d.year)
                 month = str(d.month)
