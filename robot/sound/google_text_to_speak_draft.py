@@ -19,11 +19,23 @@ os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff
 text = sys.argv[1]
 filename = sys.argv[2]
 
+welcome_text = "Hello, my name is Percival the robot "\
+"and I am awesome. Please press the "\
+"playstation button on your controller to continue"
+
+button_text = "Controller connected, Percival is online "\
+"and ready for world domination"
+
+goodbye_text = "My name is Percival, and I have been your robot. "\
+"Goodbye and thanks for the memories"
+
 # Instantiates a client
 client = texttospeech.TextToSpeechClient()
 
 # Set the text input to be synthesized
-synthesis_input = texttospeech.SynthesisInput(text=text)
+welcome = texttospeech.SynthesisInput(text=text)
+button = texttospeech.SynthesisInput(text=text)
+goodbye = texttospeech.SynthesisInput(text=text)
 
 # Build the voice request, select the language code ("en-US") and the ssml
 # voice gender ("neutral")
@@ -44,9 +56,9 @@ response = client.synthesize_speech(
 
 # The response's audio_content is binary.
 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
-with open("{}.wav".format(filename), "wb") as out:
+with open("output.wav", "wb") as out:
     # Write the response to the output file.
     out.write(response.audio_content)
-    print('Audio content written to file "{}.wav"'.format(filename))
+    print('Audio content written to file "output.wav"')
     
 os.system('aplay output.wav &')
