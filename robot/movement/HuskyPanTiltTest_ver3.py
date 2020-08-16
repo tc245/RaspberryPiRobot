@@ -117,6 +117,7 @@ while True:
     try:
         Xerror = Xtarget + (husky.command_request_blocks()[0][0]-x_mid)
         Yerror = Ytarget + (husky.command_request_blocks()[0][1]-y_mid)
+        print("X {}, Y {{".format((husky.command_request_blocks()[0][0]-x_mid), husky.command_request_blocks()[0][1]-y_mid))
         print("X error: {}, Y error: {}".format(Xerror, Yerror))
         
         new_y = (KP_y * Yerror)+PT.get_tilt()
