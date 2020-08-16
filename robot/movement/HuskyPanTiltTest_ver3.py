@@ -130,18 +130,18 @@ while True:
             TB.SetMotors(0)
         if Xerror > 0:            
             if new_x > maxPower:
-                TB.SetMotor1(0-maxPower)
-                TB.SetMotor2(maxPower)
+                TB.SetMotor2(0-maxPower)
+                TB.SetMotor1(maxPower)
             elif new_x < maxPower:
-                TB.SetMotor1(new_x-(new_x*2))
-                TB.SetMotor2(new_x)
+                TB.SetMotor2(new_x-(new_x*2))
+                TB.SetMotor1(new_x)
         elif Xerror < 0:            
             if new_x > maxPower:
-                TB.SetMotor1(maxPower)
-                TB.SetMotor2(0-maxPower)
+                TB.SetMotor2(maxPower)
+                TB.SetMotor1(0-maxPower)
             elif new_x < maxPower:
-                TB.SetMotor1(new_x)
-                TB.SetMotor2(new_x-(new_x*2))
+                TB.SetMotor2(new_x)
+                TB.SetMotor1(new_x-(new_x*2))
         #Tilt with pan tilt hat
         PT.tilt(new_y)
     
