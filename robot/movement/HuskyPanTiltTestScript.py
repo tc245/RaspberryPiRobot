@@ -102,7 +102,7 @@ input(""""Align your face with the camera and register it using the
 while True:
     try:
         Xerror = Xtarget - (husky.command_request_blocks()[0][0]-x_mid)
-        Yerror = (husky.command_request_blocks()[0][1]-y_mid) - Ytarget
+        Yerror = Ytarget - (husky.command_request_blocks()[0][1]-y_mid)
         print("Y error: {}, X error: {}".format(Yerror, Xerror))
         
         new_y = (KP_y * Yerror)+PT.get_tilt()
