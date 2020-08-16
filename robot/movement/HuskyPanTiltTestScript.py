@@ -103,11 +103,11 @@ while True:
     try:
         Xerror = Xtarget - (husky.command_request_blocks()[0][0]-x_mid)
         Yerror = Ytarget - (husky.command_request_blocks()[0][1]-y_mid)
-        print("Y error: {}, X error: {}".format(Yerror, Xerror))
+        print("X error: {}, Y error: {}".format(Xerror, Yerror))
         
         new_y = (KP_y * Yerror)+PT.get_tilt()
         new_x = (KP_x * Xerror)+PT.get_pan()
-        print("Y new: {}, X new: {}".format(new_y, new_x))
+        print("X new: {}, Y new: {}".format(new_x, new_y))
     
     except Exception as e:
         print(e)
