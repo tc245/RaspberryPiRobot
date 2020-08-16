@@ -55,7 +55,7 @@ PT.show()
 #Variables#
 ###########
 
-interval = 2
+interval = 0.1
 pan=0 #camera pan angle
 tilt=0 # camera tilt angle
 x_coords_range = 160 #Range of x coordinates
