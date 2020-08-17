@@ -302,8 +302,11 @@ while not done:
                     PT.show()
                     light_on = True
                     
-            elif joystick.get_button(button_level): #Battery level
-                current_battery_percent = 100-(100/4)*(13.5-TB.GetBatteryReading())
+            elif joystick.get_button(battery_button): #Battery level
+                battery_list = []
+                for i in range(10):
+                    battery_list.append(100-(100/4)*(13.5-TB.GetBatteryReading()))
+                current_battery = sum(battery_list)/len(battery_list)  
                 battery_message = "Battery level is {}%".format(current_battery)
                 synthesis_input = texttospeech.SynthesisInput(text=battery_message)
                 response = client.synthesize_speech(input=synthesis_input, 
