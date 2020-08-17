@@ -40,7 +40,7 @@ slowFactor = 0.5        # Speed to slow to when the drive slowly button is held,
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
 camera = 1              # Button number for camera shutter
 horn = 12               # Button number for Horn
-disco = 2               # Button number for disco mode
+battery_level = 2       # Button number for disco mode
 light = 3               # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
@@ -61,6 +61,7 @@ sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
+from google.cloud import texttospeech
 
 print("Robot activated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
@@ -125,6 +126,15 @@ PT.idle_timeout(2)
 TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
+
+#Create google text to speech instance
+client = texttospeech.TextToSpeechClient()
+voice = texttospeech.VoiceSelectionParams(
+    language_code="en-GB-Standard-F", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
+)
+audio_config = texttospeech.AudioConfig(
+    audio_encoding=texttospeech.AudioEncoding.LINEAR16
+) 
 
 #create camera object and set up neopixels
 camera = picamera.PiCamera()
@@ -213,7 +223,7 @@ slowFactor = 0.5        # Speed to slow to when the drive slowly button is held,
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
 camera_button = 1       # Button number for camera shutter
 horn_button = 12        # Button number for Horn
-disco_button = 2        # Button number for disco mode
+battery_button = 2        # Button number for disco mode
 light_button = 3        # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
 compass_button = 0      # Button to display compass heading
@@ -288,6 +298,20 @@ while not done:
                     PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = True
+                    
+            elif joystick.get_button(button_level): #Battery level
+                current_battery = TB.GetBatteryReading()
+                battery_message = "Battery level is {}".format(current_battery)
+                synthesis_input = texttospeech.SynthesisInput(text=battery_message)
+                response = client.synthesize_speech(input=synthesis_input, 
+                                                    voice=voice, 
+                                                    audio_config=audio_config)
+                os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
+                with open("battery.wav", "wb") as out:
+                    # Write the response to the output file.
+                    out.write(response.audio_content)
+                battery = pygame.mixer.Sound("battery.wav")
+                battery.play()
 
             #elif joystick.get_button(compass_button): #Display compass heading
                 #rh = raw_heading(zero=zero)
