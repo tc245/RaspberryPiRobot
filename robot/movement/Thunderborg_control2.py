@@ -63,7 +63,8 @@ sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 from google.cloud import texttospeech
 
-os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/My Project-6d2a94c6ff22.json"')
+#os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/My Project-6d2a94c6ff22.json"')
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-6d2a94c6ff22.json"
 
 print("Robot activated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
