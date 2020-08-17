@@ -14,7 +14,7 @@ from google.cloud import texttospeech
 import os
 import sys
 
-os.system("export GOOGLE_APPLICATION_CREDENTIALS='/home/pi/My Project-6d2a94c6ff22.json'")
+os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/My Project-6d2a94c6ff22.json"')
 
 text = sys.argv[1]
 filename = sys.argv[2]
