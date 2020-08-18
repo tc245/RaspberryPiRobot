@@ -68,7 +68,20 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-6d2a94c6ff22.j
 
 print("Robot activated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
-#Define function to generate a compass heading
+########################
+##Function definitions##
+########################
+
+# get battery status
+def get_battery_status(samples):
+    battery_list = []
+    
+    for i in range(samples):
+        battery_list.append(100-(100/4)*(13.5-TB.GetBatteryReading()))
+    
+    return (5*(round((round(sum(battery_list)/len(battery_list)))/5)))
+
+#Compass heading
 def raw_heading(zero=0):
     """Return a raw compass heading calculated from the magnetometer data."""
 
@@ -303,21 +316,8 @@ while not done:
                     light_on = True
                     
             elif joystick.get_button(battery_button): #Battery level
-                battery_list = []
-                for i in range(10):
-                    battery_list.append(100-(100/4)*(13.5-TB.GetBatteryReading()))
-                current_battery = sum(battery_list)/len(battery_list)  
-                battery_message = "Battery level is {}%".format(current_battery)
-                synthesis_input = texttospeech.SynthesisInput(text=battery_message)
-                response = client.synthesize_speech(input=synthesis_input, 
-                                                    voice=voice, 
-                                                    audio_config=audio_config)
                 os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
-                with open("battery.wav", "wb") as out:
-                    # Write the response to the output file.
-                    out.write(response.audio_content)
-                battery = pygame.mixer.Sound("battery.wav")
-                battery.play()
+                pygame.mixer.Sound("battery_level_{}.wav".format(get_battery_status(5))).play()
 
             #elif joystick.get_button(compass_button): #Display compass heading
                 #rh = raw_heading(zero=zero)

@@ -14,10 +14,10 @@ from google.cloud import texttospeech
 import os
 import sys
 
-os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/My Project-6d2a94c6ff22.json"')
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-6d2a94c6ff22.json"
 
 text = sys.argv[1]
-filename = sys.argv[2]
+filename = "battery_level_{}".format(sys.argv[2])
 
 # Instantiates a client
 client = texttospeech.TextToSpeechClient()
@@ -48,5 +48,3 @@ with open("{}.wav".format(filename), "wb") as out:
     # Write the response to the output file.
     out.write(response.audio_content)
     print('Audio content written to file "{}.wav"'.format(filename))
-    
-os.system('aplay output.wav &')
