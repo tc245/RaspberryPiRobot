@@ -193,6 +193,9 @@ ps_button = pygame.mixer.Sound("ps_button.wav")
 horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 goodbye = pygame.mixer.Sound("jovial_goodbye.wav")
+nas_connected = pygame.mixer.Sound("Connected_to_NAS_storage.wav")
+nas_not_connected = pygame.mixer.Sound("not_connected_to_NAS_storage.wav")
+
 
 #set up the compass
 #lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
@@ -257,6 +260,11 @@ light_on = False
 #Path variables
 local_photo_path = "/home/pi/RaspberryPiRobot/pictures/"
 nas_photo_path = "/home/pi/RaspberryPiStorage/Robot/Pictures/"
+
+if os.path.exists(nas_photo_path):
+    nas_connected.play()
+if not os.path.exists(nas_photo_path):
+    nas_not_connected.play()
 
 #Compass
 #offsets = [0.08085445, 0, 0.08645489]
