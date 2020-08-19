@@ -418,7 +418,7 @@ while not done:
 
 #Quit program sequence            
 PT.pan(0)
-PT.tilt(0)
+PT.tilt(-15)
 print(goodbye) #print quit message
 goodbye_length=goodbye.get_length()
 goodbye.play()
