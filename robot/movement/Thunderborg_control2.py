@@ -128,7 +128,7 @@ white = 0
 
 #create counter variables for the pantilt
 pan_to = 0
-tilt_to = 0
+tilt_to = -15
 
 #Centre the camera
 PT.pan(pan_to)
