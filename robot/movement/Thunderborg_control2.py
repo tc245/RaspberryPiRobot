@@ -261,11 +261,6 @@ light_on = False
 local_photo_path = "/home/pi/RaspberryPiRobot/pictures/"
 nas_photo_path = "/home/pi/RaspberryPiStorage/Robot/Pictures/"
 
-if os.path.exists(nas_photo_path):
-    nas_connected.play()
-if not os.path.exists(nas_photo_path):
-    nas_not_connected.play()
-
 #Compass
 #offsets = [0.08085445, 0, 0.08645489]
 # Python 2/3 compatibility
@@ -303,10 +298,7 @@ while not done:
 
 
             elif joystick.get_button(camera_button): #camera and 
-                if os.path.exists(nas_photo_path):
-                    os.chdir(nas_photo_path)
-                if not os.path.exists(nas_photo_path):
-                    os.chdir(local_photo_path)
+                os.chdir(local_photo_path)
                 d = datetime.now() #Collect time stamp when picture taken
                 year = str(d.year)
                 month = str(d.month)
