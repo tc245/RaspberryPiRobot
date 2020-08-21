@@ -195,7 +195,7 @@ camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 goodbye = pygame.mixer.Sound("jovial_goodbye.wav")
 nas_connected = pygame.mixer.Sound("Connected_to_NAS_storage.wav")
 nas_not_connected = pygame.mixer.Sound("not_connected_to_NAS_storage.wav")
-
+battery_critical = pygame.mixer.Sound("critical_battery.wav")
 
 #set up the compass
 #lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
@@ -279,6 +279,10 @@ nas_photo_path = "/home/pi/RaspberryPiStorage/Robot/Pictures/"
 
 # -------- Main Program Loop -----------
 while not done:
+    if get_battery_status(5) < 10: #First check the battery level
+        battery_critical.play()
+        time.sleep(battery_critical.get_length())
+        done = True
     #
     # EVENT PROCESSING STEP
     #
@@ -420,9 +424,8 @@ while not done:
 PT.pan(0)
 PT.tilt(-15)
 print(goodbye) #print quit message
-goodbye_length=goodbye.get_length()
 goodbye.play()
-time.sleep(goodbye_length)
+time.sleep(goodbye.get_length())
 led1_pi.off()
 led2_pi.off()
 print("Robot terminated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
