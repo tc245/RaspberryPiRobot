@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: Latin-1
 
 # Creates a web-page interface for MonsterBorg
