@@ -10,7 +10,7 @@ import ThunderBorg3 as ThunderBorg
 import time
 import sys
 import threading
-import SocketServer
+import socketserver
 import picamera
 import picamera.array
 import cv2
