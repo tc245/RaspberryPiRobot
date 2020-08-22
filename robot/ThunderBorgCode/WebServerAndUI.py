@@ -148,7 +148,7 @@ class ImageCapture(threading.Thread):
                 processor.event.set()
 
 # Class used to implement the web server
-class WebServer(SocketServer.BaseRequestHandler):
+class WebServer(socketserver.BaseRequestHandler):
     def handle(self):
         global TB
         global lastFrame
@@ -367,7 +367,7 @@ watchdog = Watchdog()
 # Run the web server until we are told to close
 try:
     httpServer = None
-    httpServer = SocketServer.TCPServer(("0.0.0.0", webPort), WebServer)
+    httpServer = socketserver.TCPServer(("0.0.0.0", webPort), WebServer)
 except:
     # Failed to open the port, report common issues
     print
