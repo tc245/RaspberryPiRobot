@@ -155,6 +155,7 @@ class WebServer(socketserver.BaseRequestHandler):
         global watchdog
         # Get the HTTP request data
         reqData = self.request.recv(1024).strip()
+        print(reqData)
         reqData = reqData.split('')
         # Get the URL requested
         getPath = ''
