@@ -177,7 +177,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText = '<html><body><center>'
             httpText += 'Speeds: 0 %, 0 %'
             httpText += '</center></body></html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
             TB.MotorsOff()
         elif getPath.startswith('/set/'):
             # Motor power setting: /set/driveLeft/driveRight
@@ -210,7 +210,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText = '<html><body><center>'
             httpText += 'Speeds: {}, {}'.format(percentLeft, percentRight)
             httpText += '</center></body></html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
             # Set the outputs
             driveLeft *= maxPower
             driveRight *= maxPower
@@ -234,7 +234,7 @@ class WebServer(socketserver.BaseRequestHandler):
             else:
                 httpText += 'Failed to take photo!'
             httpText += '</center></body></html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
         elif getPath == '/':
             # Main page, click buttons to move and to stop
             httpText = '<html>'
@@ -277,7 +277,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += '</center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
         elif getPath == '/hold':
             # Alternate page, hold buttons to move (does not work with all devices)
             httpText = '<html>'
@@ -318,7 +318,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += '</center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
         elif getPath == '/stream':
             # Streaming frame, set a delayed refresh
             displayDelay = int(1000 / displayRate)
@@ -336,13 +336,13 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText).encode()
+            self.send(httpText.encode())
         else:
             # Unexpected page
-            self.send('Path : "{}"'.format(getPath)).encode()
+            self.send('Path : "{}"'.format(getPath).encode())
 
     def send(self, content):
-        self.request.sendall('HTTP/1.0 200 OK {}'.format(content)).encode()
+        self.request.sendall('HTTP/1.0 200 OK {}'.format(content).encode())
 
 
 # Create the image buffer frame
