@@ -177,7 +177,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText = '<html><body><center>'
             httpText += 'Speeds: 0 %, 0 %'
             httpText += '</center></body></html>'
-            self.send(httpText)
+            self.send(httpText).encode()
             TB.MotorsOff()
         elif getPath.startswith('/set/'):
             # Motor power setting: /set/driveLeft/driveRight
@@ -208,9 +208,9 @@ class WebServer(socketserver.BaseRequestHandler):
             percentLeft = driveLeft * 100.0;
             percentRight = driveRight * 100.0;
             httpText = '<html><body><center>'
-            httpText += 'Speeds: %.0f %%, %.0f %%' % (percentLeft, percentRight)
+            httpText += 'Speeds: {}, {}'.format(percentLeft, percentRight)
             httpText += '</center></body></html>'
-            self.send(httpText)
+            self.send(httpText).encode()
             # Set the outputs
             driveLeft *= maxPower
             driveRight *= maxPower
@@ -223,18 +223,18 @@ class WebServer(socketserver.BaseRequestHandler):
             lockFrame.release()
             httpText = '<html><body><center>'
             if captureFrame != None:
-                photoName = '%s/Photo %s.jpg' % (photoDirectory, datetime.datetime.utcnow())
+                photoName = "{}/Photo {}.jpg".format(photoDirectory, datetime.datetime.utcnow())
                 try:
                     photoFile = open(photoName, 'wb')
                     photoFile.write(captureFrame)
                     photoFile.close()
-                    httpText += 'Photo saved to %s' % (photoName)
+                    httpText += "Photo saved to {}".format(photoName)
                 except:
                     httpText += 'Failed to take photo!'
             else:
                 httpText += 'Failed to take photo!'
             httpText += '</center></body></html>'
-            self.send(httpText)
+            self.send(httpText).encode()
         elif getPath == '/':
             # Main page, click buttons to move and to stop
             httpText = '<html>'
@@ -277,7 +277,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += '</center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText)
+            self.send(httpText).encode()
         elif getPath == '/hold':
             # Alternate page, hold buttons to move (does not work with all devices)
             httpText = '<html>'
@@ -318,7 +318,7 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += '</center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText)
+            self.send(httpText).encode()
         elif getPath == '/stream':
             # Streaming frame, set a delayed refresh
             displayDelay = int(1000 / displayRate)
@@ -328,21 +328,21 @@ class WebServer(socketserver.BaseRequestHandler):
             httpText += 'function refreshImage() {'
             httpText += ' if (!document.images) return;'
             httpText += ' document.images["rpicam"].src = "cam.jpg?" + Math.random();'
-            httpText += ' setTimeout("refreshImage()", %d);' % (displayDelay)
+            httpText += ' setTimeout("refreshImage()", {});'.format(displayDelay)
             httpText += '}'
             httpText += '//--></script>'
             httpText += '</head>'
-            httpText += '<body onLoad="setTimeout(\'refreshImage()\', %d)">' % (displayDelay)
+            httpText += '<body onLoad="setTimeout(\'refreshImage()\', {})">'.format(displayDelay)
             httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>'
             httpText += '</body>'
             httpText += '</html>'
-            self.send(httpText)
+            self.send(httpText).encode()
         else:
             # Unexpected page
-            self.send('Path : "%s"' % (getPath))
+            self.send('Path : "{}"'.format(getPath)).encode()
 
     def send(self, content):
-        self.request.sendall('HTTP/1.0 200 OK %s' % (content))
+        self.request.sendall('HTTP/1.0 200 OK {}'.format(content)).encode()
 
 
 # Create the image buffer frame
