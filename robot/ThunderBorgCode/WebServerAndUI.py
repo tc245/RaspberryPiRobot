@@ -239,6 +239,7 @@ class WebServer(socketserver.BaseRequestHandler):
             # Main page, click buttons to move and to stop
             httpText = '<html>'
             httpText += '<head>'
+            httpText += '<link rel="icon" href="data:,">'
             httpText += '<script language="JavaScript"><!--'
             httpText += 'function Drive(left, right) {'
             httpText += ' var iframe = document.getElementById("setDrive");'
@@ -282,6 +283,7 @@ class WebServer(socketserver.BaseRequestHandler):
             # Alternate page, hold buttons to move (does not work with all devices)
             httpText = '<html>'
             httpText += '<head>'
+            httpText += '<link rel="icon" href="data:,">'
             httpText += '<script language="JavaScript"><!--'
             httpText += 'function Drive(left, right) {'
             httpText += ' var iframe = document.getElementById("setDrive");'
@@ -324,6 +326,7 @@ class WebServer(socketserver.BaseRequestHandler):
             displayDelay = int(1000 / displayRate)
             httpText = '<html>'
             httpText += '<head>'
+            httpText += '<link rel="icon" href="data:,">'
             httpText += '<script language="JavaScript"><!--'
             httpText += 'function refreshImage() {'
             httpText += ' if (!document.images) return;'
