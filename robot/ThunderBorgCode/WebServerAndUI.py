@@ -156,6 +156,7 @@ class WebServer(socketserver.BaseRequestHandler):
         # Get the HTTP request data
         reqData = self.request.recv(1024).decode().strip()
         reqData = reqData.split('\n')
+        print(reqData)
         # Get the URL requested
         getPath = ''
         for line in reqData:
