@@ -30,8 +30,8 @@ from subprocess import call
 
 
 cmd_beg= 'espeak '
-cmd_end= ' | aplay /home/pi/Desktop/Text.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
-cmd_out= '--stdout > /home/pi/Desktop/Text.wav ' # To store the voice file
+cmd_end= ' | aplay /home/pi/Text.wav  2>/dev/null' # To play back the stored .wav file and to dump the std errors to /dev/null
+cmd_out= '--stdout > /home/pi/Text.wav ' # To store the voice file
 
 text = input("Enter the Text: ")
 print(text)

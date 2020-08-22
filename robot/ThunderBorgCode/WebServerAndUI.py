@@ -1,14 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: Latin-1
 
 # Creates a web-page interface for MonsterBorg
 
 # Import library functions we need
-import ThunderBorg
+import sys
+sys.path.append('/home/pi/thunderborg')
+import ThunderBorg3 as ThunderBorg
 import time
 import sys
 import threading
-import SocketServer
+import socketserver
 import picamera
 import picamera.array
 import cv2
@@ -38,17 +40,6 @@ TB = ThunderBorg.ThunderBorg()
 
 TB.i2cAddress = 0x0a                  #Board address changed
 TB.Init()
-if not TB.foundChip:
-    boards = ThunderBorg.ScanForThunderBorg()
-    if len(boards) == 0:
-        print 'No ThunderBorg found, check you are attached :)'
-    else:
-        print 'No ThunderBorg at address %02X, but we did find boards:' % (TB.i2cAddress)
-        for board in boards:
-            print '    %02X (%d)' % (board, board)
-        print 'If you need to change the I²C address change the setup line so it is correct, e.g.'
-        print 'TB.i2cAddress = 0x%02X' % (boards[0])
-    sys.exit()
 TB.SetCommsFailsafe(False)
 TB.SetLedShowBattery(False)
 TB.SetLeds(0,0,1)
@@ -80,7 +71,7 @@ class Watchdog(threading.Thread):
             if timedOut:
                 if self.event.wait(1):
                     # Connection
-                    print 'Reconnected...'
+                    print("Reconnected...")
                     TB.SetLedShowBattery(True)
                     timedOut = False
                     self.event.clear()
@@ -89,7 +80,7 @@ class Watchdog(threading.Thread):
                     self.event.clear()
                 else:
                     # Timed out
-                    print 'Timed out...'
+                    print("Timed out...")
                     TB.SetLedShowBattery(False)
                     TB.SetLeds(0,0,1)
                     timedOut = True
@@ -139,12 +130,12 @@ class ImageCapture(threading.Thread):
     def run(self):
         global camera
         global processor
-        print 'Start the stream using the video port'
+        print("Start the stream using the video port")
         camera.capture_sequence(self.TriggerStream(), format='bgr', use_video_port=True)
-        print 'Terminating camera processing...'
+        print("Terminating camera processing...")
         processor.terminated = True
         processor.join()
-        print 'Processing terminated.'
+        print("Processing terminated.")
 
     # Stream delegation loop
     def TriggerStream(self):
@@ -164,8 +155,7 @@ class WebServer(SocketServer.BaseRequestHandler):
         global watchdog
         # Get the HTTP request data
         reqData = self.request.recv(1024).strip()
-        reqData = reqData.split('
-')
+        reqData = reqData.split('')
         # Get the URL requested
         getPath = ''
         for line in reqData:
@@ -246,202 +236,112 @@ class WebServer(SocketServer.BaseRequestHandler):
             self.send(httpText)
         elif getPath == '/':
             # Main page, click buttons to move and to stop
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function Drive(left, right) {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' var slider = document.getElementById("speed");
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function Drive(left, right) {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' var slider = document.getElementById("speed");'
             httpText += ' left *= speed.value / 100.0;'
             httpText += ' right *= speed.value / 100.0;'
-            httpText += ' iframe.src = "/set/" + left + "/" + right;
-'
-            httpText += '}
-'
-            httpText += 'function Off() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/off";
-'
-            httpText += '}
-'
-            httpText += 'function Photo() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/photo";
-'
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body>
-'
-            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>
-'
-            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>
-'
-            httpText += '<center>
-'
-            httpText += '<button onclick="Drive(-1,1)" style="width:200px;height:100px;"><b>Spin Left</b></button>
-'
-            httpText += '<button onclick="Drive(1,1)" style="width:200px;height:100px;"><b>Forward</b></button>
-'
-            httpText += '<button onclick="Drive(1,-1)" style="width:200px;height:100px;"><b>Spin Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Drive(0,1)" style="width:200px;height:100px;"><b>Turn Left</b></button>
-'
-            httpText += '<button onclick="Drive(-1,-1)" style="width:200px;height:100px;"><b>Reverse</b></button>
-'
-            httpText += '<button onclick="Drive(1,0)" style="width:200px;height:100px;"><b>Turn Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Off()" style="width:200px;height:100px;"><b>Stop</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />
-'
-            httpText += '</center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText += ' iframe.src = "/set/" + left + "/" + right;'
+            httpText += '}'
+            httpText += 'function Off() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/off";'
+            httpText += '}'
+            httpText += 'function Photo() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/photo";'
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body>'
+            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>'
+            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>'
+            httpText += '<center>'
+            httpText += '<button onclick="Drive(-1,1)" style="width:200px;height:100px;"><b>Spin Left</b></button>'
+            httpText += '<button onclick="Drive(1,1)" style="width:200px;height:100px;"><b>Forward</b></button>'
+            httpText += '<button onclick="Drive(1,-1)" style="width:200px;height:100px;"><b>Spin Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Drive(0,1)" style="width:200px;height:100px;"><b>Turn Left</b></button>'
+            httpText += '<button onclick="Drive(-1,-1)" style="width:200px;height:100px;"><b>Reverse</b></button>'
+            httpText += '<button onclick="Drive(1,0)" style="width:200px;height:100px;"><b>Turn Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Off()" style="width:200px;height:100px;"><b>Stop</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />'
+            httpText += '</center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         elif getPath == '/hold':
             # Alternate page, hold buttons to move (does not work with all devices)
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function Drive(left, right) {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' var slider = document.getElementById("speed");
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function Drive(left, right) {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' var slider = document.getElementById("speed");'
             httpText += ' left *= speed.value / 100.0;'
             httpText += ' right *= speed.value / 100.0;'
-            httpText += ' iframe.src = "/set/" + left + "/" + right;
-'
-            httpText += '}
-'
-            httpText += 'function Off() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/off";
-'
-            httpText += '}
-'
-            httpText += 'function Photo() {
-'
-            httpText += ' var iframe = document.getElementById("setDrive");
-'
-            httpText += ' iframe.src = "/photo";
-'
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body>
-'
-            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>
-'
-            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>
-'
-            httpText += '<center>
-'
-            httpText += '<button onmousedown="Drive(-1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Left</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Forward</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onmousedown="Drive(0,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Left</b></button>
-'
-            httpText += '<button onmousedown="Drive(-1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Reverse</b></button>
-'
-            httpText += '<button onmousedown="Drive(1,0)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Right</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>
-'
-            httpText += '<br /><br />
-'
-            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />
-'
-            httpText += '</center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText += ' iframe.src = "/set/" + left + "/" + right;'
+            httpText += '}'
+            httpText += 'function Off() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/off";'
+            httpText += '}'
+            httpText += 'function Photo() {'
+            httpText += ' var iframe = document.getElementById("setDrive");'
+            httpText += ' iframe.src = "/photo";'
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body>'
+            httpText += '<iframe src="/stream" width="100%" height="500" frameborder="0"></iframe>'
+            httpText += '<iframe id="setDrive" src="/off" width="100%" height="50" frameborder="0"></iframe>'
+            httpText += '<center>'
+            httpText += '<button onmousedown="Drive(-1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Left</b></button>'
+            httpText += '<button onmousedown="Drive(1,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Forward</b></button>'
+            httpText += '<button onmousedown="Drive(1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Spin Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onmousedown="Drive(0,1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Left</b></button>'
+            httpText += '<button onmousedown="Drive(-1,-1)" onmouseup="Off()" style="width:200px;height:100px;"><b>Reverse</b></button>'
+            httpText += '<button onmousedown="Drive(1,0)" onmouseup="Off()" style="width:200px;height:100px;"><b>Turn Right</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<button onclick="Photo()" style="width:200px;height:100px;"><b>Save Photo</b></button>'
+            httpText += '<br /><br />'
+            httpText += '<input id="speed" type="range" min="0" max="100" value="100" style="width:600px" />'
+            httpText += '</center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         elif getPath == '/stream':
             # Streaming frame, set a delayed refresh
             displayDelay = int(1000 / displayRate)
-            httpText = '<html>
-'
-            httpText += '<head>
-'
-            httpText += '<script language="JavaScript"><!--
-'
-            httpText += 'function refreshImage() {
-'
-            httpText += ' if (!document.images) return;
-'
-            httpText += ' document.images["rpicam"].src = "cam.jpg?" + Math.random();
-'
-            httpText += ' setTimeout("refreshImage()", %d);
-' % (displayDelay)
-            httpText += '}
-'
-            httpText += '//--></script>
-'
-            httpText += '</head>
-'
-            httpText += '<body onLoad="setTimeout(\'refreshImage()\', %d)">
-' % (displayDelay)
-            httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>
-'
-            httpText += '</body>
-'
-            httpText += '</html>
-'
+            httpText = '<html>'
+            httpText += '<head>'
+            httpText += '<script language="JavaScript"><!--'
+            httpText += 'function refreshImage() {'
+            httpText += ' if (!document.images) return;'
+            httpText += ' document.images["rpicam"].src = "cam.jpg?" + Math.random();'
+            httpText += ' setTimeout("refreshImage()", %d);' % (displayDelay)
+            httpText += '}'
+            httpText += '//--></script>'
+            httpText += '</head>'
+            httpText += '<body onLoad="setTimeout(\'refreshImage()\', %d)">' % (displayDelay)
+            httpText += '<center><img src="/cam.jpg" style="width:600;height:480;" name="rpicam" /></center>'
+            httpText += '</body>'
+            httpText += '</html>'
             self.send(httpText)
         else:
             # Unexpected page
             self.send('Path : "%s"' % (getPath))
 
     def send(self, content):
-        self.request.sendall('HTTP/1.0 200 OK
-
-%s' % (content))
+        self.request.sendall('HTTP/1.0 200 OK %s' % (content))
 
 
 # Create the image buffer frame
@@ -449,19 +349,19 @@ lastFrame = None
 lockFrame = threading.Lock()
 
 # Startup sequence
-print 'Setup camera'
+print("Setup camera")
 camera = picamera.PiCamera()
 camera.resolution = (imageWidth, imageHeight)
 camera.framerate = frameRate
 
-print 'Setup the stream processing thread'
+print("Setup the stream processing thread")
 processor = StreamProcessor()
 
-print 'Wait ...'
+print("Wait ...")
 time.sleep(2)
 captureThread = ImageCapture()
 
-print 'Setup the watchdog'
+print("Setup the watchdog")
 watchdog = Watchdog()
 
 # Run the web server until we are told to close
@@ -471,25 +371,23 @@ try:
 except:
     # Failed to open the port, report common issues
     print
-    print 'Failed to open port %d' % (webPort)
-    print 'Make sure you are running the script with sudo permissions'
-    print 'Other problems include running another script with the same port'
-    print 'If the script was just working recently try waiting a minute first'
-    print 
+    print("Failed to open port {}".format(webPort))
+    print("Make sure you are running the script with sudo permissions")
+    print("Other problems include running another script with the same port")
+    print("If the script was just working recently try waiting a minute first")
     # Flag the script to exit
     running = False
 try:
-    print 'Press CTRL+C to terminate the web-server'
+    print("Press CTRL+C to terminate the web-server")
     while running:
         httpServer.handle_request()
 except KeyboardInterrupt:
     # CTRL+C exit
-    print '
-User shutdown'
+    print("User shutdown")
 finally:
     # Turn the motors off under all scenarios
     TB.MotorsOff()
-    print 'Motors off'
+    print("Motors off")
 # Tell each thread to stop, and wait for them to end
 if httpServer != None:
     httpServer.server_close()
@@ -503,4 +401,4 @@ del camera
 TB.SetLedShowBattery(False)
 TB.SetLeds(0,0,0)
 TB.MotorsOff()
-print 'Web-server terminated.'
+print("Web-server terminated.")

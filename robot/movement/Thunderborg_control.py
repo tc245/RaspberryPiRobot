@@ -57,12 +57,38 @@ import sys
 from subprocess import call
 import picamera
 from datetime import datetime
-
+from lsm303d import LSM303D
+import sys
+sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
+from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
-import ThunderBorg
+import ThunderBorg3 as ThunderBorg
 
-#mount NAS
-call(["sudo", "mount", "-a"])
+
+#Define function to generate a compass heading
+def raw_heading(zero=0):
+    """Return a raw compass heading calculated from the magnetometer data."""
+
+    X = 0
+    Y = 2  # Change to 1 if you have the breakout flat
+
+    # Get the magnetometer's values
+    mag = list(lsm.magnetometer())
+
+    # Scale and shift values
+    for i in range(len(mag)):
+        mag[i] = mag[i] - offsets[i]
+
+    # Calculate the heading from the vector
+    heading = math.atan2(mag[Y], mag[X])
+
+    if heading < 0:
+        heading += (2 * math.pi)
+
+    # Convert radian value to degrees
+    heading_degrees = (round(math.degrees(heading), 2) - zero) % 360
+
+    return heading_degrees
 
 #Sound test
 #call(["aplay", "/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/car_horn.wav"])
@@ -87,7 +113,6 @@ white = 0
 #create counter variables for the pantilt
 pan_to = 0
 tilt_to = 0
-
 
 #Centre the camera
 PT.pan(pan_to)
@@ -119,13 +144,13 @@ else:
 # Show battery monitoring settings
 battMin, battMax = TB.GetBatteryMonitoringLimits()
 battCurrent = TB.GetBatteryReading()
-print 'Battery monitoring settings:'
-print '    Minimum  (red)     %02.2f V' % (battMin)
-print '    Half-way (yellow)  %02.2f V' % ((battMin + battMax) / 2)
-print '    Maximum  (green)   %02.2f V' % (battMax)
-print
-print '    Current voltage    %02.2f V' % (battCurrent)
-print
+#print 'Battery monitoring settings:'
+#print '    Minimum  (red)     %02.2f V' % (battMin)
+#print '    Half-way (yellow)  %02.2f V' % ((battMin + battMax) / 2)
+#print '    Maximum  (green)   %02.2f V' % (battMax)
+#print
+#print '    Current voltage    %02.2f V' % (battCurrent)
+#print
 
 # Setup pygame and wait for the joystick to become available
 TB.MotorsOff()
@@ -139,6 +164,10 @@ os.chdir("/home/pi/RaspberryPiRobot/robot/sound/SoundsRepository/")
 goodbye = pygame.mixer.Sound("time2die.wav")
 horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
+
+#set up the compass
+#lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
+# Precalculated offsets from calibration exercise
 
 #Blinking LEDs to show controller not connected
 ready = False
@@ -181,6 +210,7 @@ horn_button = 12        # Button number for Horn
 disco_button = 2        # Button number for disco mode
 light_button = 3        # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
+compass_button = 0      # Button to display compass heading
 #Other settings
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
 
@@ -191,6 +221,22 @@ done = False
 PT.set_all(0, 0, 0, 0)
 PT.show()
 light_on = False
+
+#Compass
+#offsets = [0.08085445, 0, 0.08645489]
+# Python 2/3 compatibility
+#try:
+#    input = raw_input
+#except NameError:
+#    pass
+#input("Set a zero (North) point, then turn your breakout to that point and press a key...\n")
+
+# Zero point for the compass
+#zero = raw_heading()
+
+#Test heading
+#rh = raw_heading(zero=zero)
+#print(rh)
 
 # -------- Main Program Loop -----------
 while not done:
@@ -236,6 +282,10 @@ while not done:
                     PT.set_all(green, red, blue, white)
                     PT.show()
                     light_on = True
+
+            elif joystick.get_button(compass_button): #Display compass heading
+                rh = raw_heading(zero=zero)
+                print(rh)
 
         elif event.type == pygame.JOYAXISMOTION: #Grab forward axis values
             
