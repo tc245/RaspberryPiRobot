@@ -154,7 +154,7 @@ class WebServer(socketserver.BaseRequestHandler):
         global lastFrame
         global watchdog
         # Get the HTTP request data
-        reqData = self.request.recv(1024)
+        reqData = self.request.recv(1024).decode().strip()
         print(reqData)
         reqData = reqData.split('')
         # Get the URL requested
