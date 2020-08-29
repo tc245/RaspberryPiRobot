@@ -6,7 +6,7 @@
 # various animations on a strip of NeoPixels.
 
 import time
-from neopixel import *
+#from neopixel import *
 print("neopixels loaded")
 print('Change the number of pixels you are using in /RedBoard/neopixels.py')
 print('')
