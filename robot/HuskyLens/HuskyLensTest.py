@@ -16,6 +16,18 @@ print("First request a knock: {}".format(test.command_request_knock()))
 # Change to facial recognition algorhtim
 test.command_request_algorthim("ALGORITHM_FACE_RECOGNITION")
 
+"""Other commands are:
+command_request_algorthim(ALG_NAME)
+    * ALG_NAME is a string whose value can be the following
+        "ALGORITHM_OBJECT_TRACKING"
+        "ALGORITHM_FACE_RECOGNITION"
+        "ALGORITHM_OBJECT_RECOGNITION"
+        "ALGORITHM_LINE_TRACKING"
+        "ALGORITHM_COLOR_RECOGNITION"
+        "ALGORITHM_TAG_RECOGNITION"
+        "ALGORITHM_OBJECT_CLASSIFICATION"
+"""
+
 # Display a simple menu where you can call every function in a loop!
 ex=1
 print("""
