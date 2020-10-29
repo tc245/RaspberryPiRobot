@@ -193,8 +193,8 @@ ps_button = pygame.mixer.Sound("ps_button.wav")
 horn = pygame.mixer.Sound("car_horn.wav")
 camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 goodbye = pygame.mixer.Sound("jovial_goodbye.wav")
-nas_connected = pygame.mixer.Sound("Connected_to_NAS_storage.wav")
-nas_not_connected = pygame.mixer.Sound("not_connected_to_NAS_storage.wav")
+#nas_connected = pygame.mixer.Sound("Connected_to_NAS_storage.wav")
+#nas_not_connected = pygame.mixer.Sound("not_connected_to_NAS_storage.wav")
 battery_critical = pygame.mixer.Sound("critical_battery.wav")
 
 #set up the compass
