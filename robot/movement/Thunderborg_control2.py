@@ -16,7 +16,7 @@ Axis 4 - Right stick vertical
 Axis 5 - Right trigger
 Button 0 cross
 Button 1 circle (camera)
-Button 2 triangle (disco mode)
+Button 2 triangle (battery status)
 Button 3 square (light)
 Button 4 Left Shoulder
 Button 5 Right Shoulder
@@ -40,7 +40,7 @@ slowFactor = 0.5        # Speed to slow to when the drive slowly button is held,
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
 camera = 1              # Button number for camera shutter
 horn = 12               # Button number for Horn
-battery_level = 2       # Button number for disco mode
+battery_level = 2       # Button number for battery status
 light = 3               # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
 interval = 0.00         # Time between updates in seconds, smaller responds faster but uses more processor time
@@ -56,7 +56,7 @@ import sys
 from subprocess import call
 import picamera
 from datetime import datetime
-from lsm303d import LSM303D
+#from lsm303d import LSM303D
 sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
 from huskylensPythonLibrary import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
@@ -242,7 +242,7 @@ slowFactor = 0.5        # Speed to slow to when the drive slowly button is held,
 buttonFastTurn = 5      # Joystick button number for turning fast (R2)
 camera_button = 1       # Button number for camera shutter
 horn_button = 12        # Button number for Horn
-battery_button = 2        # Button number for disco mode
+battery_button = 2      # Button number for battery status
 light_button = 3        # Button to turn light on and off
 quit_button = 9         # Button to quit and shutdown robot
 compass_button = 0      # Button to display compass heading
