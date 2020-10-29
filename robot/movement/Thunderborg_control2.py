@@ -195,7 +195,7 @@ camera_shutter = pygame.mixer.Sound("camera_shutter.wav")
 goodbye = pygame.mixer.Sound("jovial_goodbye.wav")
 #nas_connected = pygame.mixer.Sound("Connected_to_NAS_storage.wav")
 #nas_not_connected = pygame.mixer.Sound("not_connected_to_NAS_storage.wav")
-battery_critical = pygame.mixer.Sound("critical_battery.wav")
+#battery_critical = pygame.mixer.Sound("critical_battery.wav")
 
 #set up the compass
 #lsm = LSM303D(0x1d)  # Change to 0x1e if you have soldered the address jumper
