@@ -58,7 +58,7 @@ import picamera
 from datetime import datetime
 #from lsm303d import LSM303D
 sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
-from huskylensPythonLibrary import HuskyLensLibrary
+from huskylib import HuskyLensLibrary
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 from google.cloud import texttospeech
