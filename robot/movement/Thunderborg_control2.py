@@ -143,7 +143,7 @@ TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
 
-#Create google text to speech instance
+"""#Create google text to speech instance
 client = texttospeech.TextToSpeechClient()
 voice = texttospeech.VoiceSelectionParams(
     language_code="en-GB-Standard-F", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
@@ -151,6 +151,7 @@ voice = texttospeech.VoiceSelectionParams(
 audio_config = texttospeech.AudioConfig(
     audio_encoding=texttospeech.AudioEncoding.LINEAR16
 ) 
+"""
 
 #create camera object and set up neopixels
 camera = picamera.PiCamera()
