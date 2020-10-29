@@ -64,7 +64,7 @@ import ThunderBorg3 as ThunderBorg
 from google.cloud import texttospeech
 
 #os.system('export GOOGLE_APPLICATION_CREDENTIALS="/home/pi/My Project-6d2a94c6ff22.json"')
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-6d2a94c6ff22.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-73d3d70986a5.json"
 
 print("Robot activated at {}".format(datetime.now().strftime("%d/%m/%Y %H:%M:%S")))
 
@@ -143,15 +143,14 @@ TB = ThunderBorg.ThunderBorg()
 TB.i2cAddress = 0x0a
 TB.Init()
 
-"""#Create google text to speech instance
+#Create google text to speech instance
 client = texttospeech.TextToSpeechClient()
 voice = texttospeech.VoiceSelectionParams(
     language_code="en-GB-Standard-F", ssml_gender=texttospeech.SsmlVoiceGender.FEMALE
 )
 audio_config = texttospeech.AudioConfig(
     audio_encoding=texttospeech.AudioEncoding.LINEAR16
-) 
-"""
+)
 
 #create camera object and set up neopixels
 camera = picamera.PiCamera()
