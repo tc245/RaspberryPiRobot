@@ -14,7 +14,7 @@ from google.cloud import texttospeech
 import os
 import sys
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-6d2a94c6ff22.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/pi/My Project-73d3d70986a5.json"
 
 text = sys.argv[1]
 filename = "battery_level_{}".format(sys.argv[2])
