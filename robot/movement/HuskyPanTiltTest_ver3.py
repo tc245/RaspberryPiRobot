@@ -13,7 +13,7 @@ the frame.
 
 import sys
 sys.path.append('/home/pi/HUSKYLENSPython/HUSKYLENS/')
-from huskylensPythonLibrary import HuskyLensLibrary
+from huskylib import HuskyLensLibrary
 import time
 import pantilthat
 import math
