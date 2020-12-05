@@ -20,6 +20,7 @@ import math
 sys.path.append('/home/pi/thunderborg')
 import ThunderBorg3 as ThunderBorg
 import gpiozero
+from ht0740 import HT0740
 
 ###########
 #Instances#
@@ -50,6 +51,10 @@ led1_pi.on()
 led2_pi.on()
 PT.set_all(0, 0, 0, 0)
 PT.show()
+
+#Switch instance for huskylens
+switch = HT0740()
+switch.enable()
 
 ############
 #Variables#
@@ -106,11 +111,15 @@ def is_object_centred(husky_object):
     except IndexError:
         return False
 
+#Switch on the huskylens
+switch.switch.on()
+switch.led.on()
+
 #User Set-up
 input(""""Align your face with the camera and register it using the 
       camera buttons.""")
 
-name = input("Type your name and press enter") 
+name = input("Type your name and press enter")
 
 #Main Loop
 while True:
