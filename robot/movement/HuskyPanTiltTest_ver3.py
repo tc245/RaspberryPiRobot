@@ -48,7 +48,7 @@ led1_pi = gpiozero.LED(26)
 led2_pi = gpiozero.LED(13)
 led1_pi.on()
 led2_pi.on()
-PT.set_all(0, 0, 0, 255)
+PT.set_all(0, 0, 0, 0)
 PT.show()
 
 ############
